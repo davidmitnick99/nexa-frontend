@@ -1,12 +1,12 @@
 import streamlit as strl
 import requests
 import pandas as pd
+import json
 from datetime import datetime
 
-strl.set_page_config(page_title="Nexa Core Gateway Engine", layout="wide")
+strl.set_page_config(page_title="Nexa SaaS Platform", layout="wide")
 API_BASE_URL = "https://nexa-backend-tuhl.onrender.com"
 
-# 🎨 Custom Cyberpunk Accent GUI Injection Matrix
 strl.markdown("""
 <style>
     .stApp { background-color: #0d1117; color: #c9d1d9; }
@@ -14,16 +14,13 @@ strl.markdown("""
     .stButton>button { 
         background: linear-gradient(135deg, #238636 0%, #2ea44f 100%) !important; 
         color: white !important; font-weight: bold !important; border-radius: 8px !important;
-        border: none !important; box-shadow: 0 4px 15px rgba(46,164,79,0.3); transition: all 0.3s;
+        border: none !important; box-shadow: 0 4px 15px rgba(46,164,79,0.3);
     }
-    .stButton>button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(46,164,79,0.5); }
-    .reportview-container .main .block-container{ max-width: 95%; }
-    div[data-testid="stExpander"] { background-color: #161b22 !important; border: 1px solid #30363d !important; border-radius: 8px; }
 </style>
 """, unsafe_allow_html=True)
 
 strl.title("🤖 Nexa Core Production Gateway")
-strl.caption("Autonomous Systems Hub & Agentic AI Orchestrator | Team Nexus Network")
+strl.caption("Autonomous Systems Hub & Ingested RAG Knowledge Base Engine")
 strl.markdown("---")
 
 if "authenticated" not in strl.session_state: strl.session_state.authenticated = False
@@ -31,9 +28,6 @@ if "team_id" not in strl.session_state: strl.session_state.team_id = None
 if "team_admin_token" not in strl.session_state: strl.session_state.team_admin_token = ""
 if "cached_plan" not in strl.session_state: strl.session_state.cached_plan = ""
 
-# ==========================================
-# SIDEBAR PORTAL INTERFACE
-# ==========================================
 strl.sidebar.header("🔐 Workspace Access Profile")
 
 if not strl.session_state.authenticated:
@@ -50,84 +44,68 @@ if not strl.session_state.authenticated:
                         strl.session_state.authenticated = True
                         strl.session_state.team_id = res.json()["team_id"]
                         strl.session_state.team_admin_token = res.json()["admin_token"]
-                        
-                        # Background Synchronize: Fetch historical persistent sprint directive instantly
                         hist = requests.get(f"{API_BASE_URL}/agent/cached/{strl.session_state.team_id}")
-                        if hist.status_code == 200 and hist.json().get("found"):
-                            strl.session_state.cached_plan = hist.json().get("sprint_plan", "")
+                        if hist.status_code == 200: strl.session_state.cached_plan = hist.json().get("sprint_plan", "")
                         strl.rerun()
-                    else: strl.sidebar.error("🛑 Invalid credentials.")
-                except Exception as e: strl.sidebar.error(f"💥 Server offline: {str(e)}")
-                    
+                except Exception as e: strl.sidebar.error(f"Error: {str(e)}")
     elif auth_mode == "Register New Team":
         custom_token = strl.sidebar.text_input("Define Private Admin Modification Token", type="password")
         if strl.sidebar.button("✨ Initialize New Tenant Matrix"):
             if auth_user and auth_pass and custom_token:
                 try:
                     res = requests.post(f"{API_BASE_URL}/auth/register", json={"team_username": auth_user, "password": auth_pass, "admin_token": custom_token.strip()})
-                    if res.status_code == 200: strl.sidebar.success("🎉 Registered! Proceed to Sign In.")
-                    else: strl.sidebar.error("❌ Registration rejected.")
-                except Exception as e: strl.sidebar.error(f"💥 Network error: {str(e)}")
+                    if res.status_code == 200: strl.sidebar.success("🎉 Registered! Swap to Sign In.")
+                except Exception as e: strl.sidebar.error(f"Error: {str(e)}")
 else:
-    strl.sidebar.success(f"🟢 Session: {strl.session_state.team_id.upper()}")
-    if strl.sidebar.button("🚪 Terminate Session"):
-        strl.session_state.authenticated = False
-        strl.session_state.team_id = None
-        strl.session_state.team_admin_token = ""
-        strl.session_state.cached_plan = ""
-        strl.rerun()
+    strl.sidebar.success(f"🟢 Active Workspace: {strl.session_state.team_id.upper()}")
+    if strl.sidebar.button("🚪 Terminate Secure Session"):
+        strl.session_state.authenticated = False; strl.session_state.cached_plan = ""; strl.rerun()
 
-# ==========================================
-# MAIN APPLICATION WORKSPACE
-# ==========================================
 if not strl.session_state.authenticated:
-    strl.warning("🔒 SECURE INTERFACE DISCONNECT: Please authenticate via the profile sidebar to unlock the cloud asset pipelines.")
+    strl.warning("🔒 Please authenticate via the profile sidebar to unlock the cloud asset pipelines.")
 else:
     app_mode = strl.sidebar.selectbox("Select Workspace Domain", ["📋 Client Module Dashboard", "🔒 Secure Admin Portal", "🧠 Agentic Sprint Planner"])
 
     # 1. CLIENT MODULE DASHBOARD
     if app_mode == "📋 Client Module Dashboard":
         target_module = strl.sidebar.selectbox("Active Blueprint Filter", ["Sumo Robot", "RC Car", "Robo Soccer"])
-        with strl.spinner("Synchronizing..."):
-            try:
-                response = requests.get(f"{API_BASE_URL}/modules/{strl.session_state.team_id}/{target_module}", timeout=7)
-                if response.status_code == 200:
-                    module_data = response.json()
-                    left_col, right_col = strl.columns([1, 1.2])
-                    with left_col:
-                        strl.markdown("### 🔌 System Circuit Topology")
-                        raw_url = str(module_data.get("circuit_diagram_url", "")).strip()
-                        if "http" in raw_url:
-                            strl.image(raw_url[raw_url.find("http"):], use_container_width=True)
-                        if "specs" in module_data:
-                            strl.markdown("#### ⚙️ Hardware Specifications")
-                            for spec, val in module_data["specs"].items():
-                                if val: strl.write(f"**{spec}:** {val}")
-                    with right_col:
-                        strl.markdown("### 💰 Component Budget Configuration")
-                        if "budget" in module_data and module_data["budget"]:
-                            df = pd.DataFrame(module_data["budget"])
-                            df['quantity'] = df['quantity'].astype(int)
-                            df['unit_cost_pkr'] = df['unit_cost_pkr'].astype(int)
-                            df['Total (PKR)'] = df['quantity'] * df['unit_cost_pkr']
-                            df.columns = ['Component Item', 'Qty', 'Unit Cost (PKR)', 'Total Subtotal (PKR)']
-                            strl.dataframe(df, use_container_width=True, hide_index=True)
-                            strl.metric(label="Production Cost Sum", value=f"{df['Total Subtotal (PKR)'].sum():,} PKR")
-                        if module_data.get("firmware"):
-                            strl.markdown("### 💻 Embedded Architecture Code")
-                            strl.code(module_data["firmware"], language="cpp")
-                else: strl.info("ℹ️ Workspace template blank. Seed it in the Admin Portal.")
-            except Exception as e: strl.error(f"Sync error: {str(e)}")
+        try:
+            response = requests.get(f"{API_BASE_URL}/modules/{strl.session_state.team_id}/{target_module}")
+            if response.status_code == 200:
+                module_data = response.json()
+                left_col, right_col = strl.columns([1, 1.2])
+                with left_col:
+                    strl.markdown("### 🔌 System Circuit Topology")
+                    raw_url = str(module_data.get("circuit_diagram_url", "")).strip()
+                    if "http" in raw_url: strl.image(raw_url, use_container_width=True)
+                    if "specs" in module_data:
+                        strl.markdown("#### ⚙️ Hardware Specifications")
+                        for spec, val in module_data["specs"].items(): strl.write(f"**{spec}:** {val}")
+                with right_col:
+                    strl.markdown("### 💰 Component Budget Configuration")
+                    if module_data.get("budget"):
+                        df = pd.DataFrame(module_data["budget"])
+                        df['Total (PKR)'] = df['quantity'].astype(int) * df['unit_cost_pkr'].astype(int)
+                        strl.dataframe(df, use_container_width=True, hide_index=True)
+                    if module_data.get("firmware"):
+                        strl.markdown("### 💻 Embedded Architecture Code")
+                        strl.code(module_data["firmware"], language="cpp")
+            else: strl.info("ℹ️ Namespace blank. Seed data in the Admin Portal.")
+        except Exception as e: strl.error(f"Sync issue: {str(e)}")
 
-    # 2. SECURE ADMIN PORTAL
+    # 2. SECURE ADMIN PORTAL (RAG GROUNDING UPLOADER WIDGET)
     elif app_mode == "🔒 Secure Admin Portal":
         strl.markdown(f"## 🔒 Profile Writing Desk: {strl.session_state.team_id.upper()}")
         admin_token_input = strl.text_input("Enter Private Admin Modification Token", type="password")
         if admin_token_input == strl.session_state.team_admin_token and strl.session_state.team_admin_token != "":
-            strl.success("🔓 Token Verified.")
+            strl.success("🔓 Access Authorized.")
             if "rows" not in strl.session_state: strl.session_state.rows = 4
+            
             mod_name = strl.selectbox("Select Target Module", ["Sumo Robot", "RC Car", "Robo Soccer"])
             diag_url = strl.text_input("Circuit Diagram Image URL")
+            
+            # 📁 NEW: Component Technical PDF File Stream Buffer Widget Box
+            uploaded_pdf = strl.file_uploader("📥 Upload Component Technical Datasheet PDF (RAG Ingestion Base)", type=["pdf"], help="Drop any component hardware data sheet here (e.g., L298N driver, ESP32 map). The agent will extract pin descriptions natively.")
             
             strl.markdown("#### ⚙️ Technical Specifications")
             chassis = strl.text_input("Chassis Frame Structure Type")
@@ -145,17 +123,26 @@ else:
                 if it_name.strip(): budget_list.append({"item": it_name.strip(), "quantity": int(it_qty), "unit_cost_pkr": int(it_cost)})
             
             if strl.button("➕ Add Another Component Line"):
-                strl.session_state.rows += 1
-                strl.rerun()
+                strl.session_state.rows += 1; strl.rerun()
+                
             firmware_code = strl.text_area("Paste C++ Code Memory Matrix", height=150)
             
             if strl.button("🚀 Broadcast Module Blueprint to Cloud"):
-                res = requests.post(f"{API_BASE_URL}/modules/add", json={
+                form_payload = {
                     "team_id": strl.session_state.team_id, "module_name": mod_name, "circuit_diagram_url": diag_url.strip(),
-                    "specs": {"Chassis": chassis, "Microcontroller": mcu, "Motors": motors, "Motor Driver": drivers, "Sensors": sensors},
-                    "budget": budget_list, "firmware": firmware_code
-                })
-                if res.status_code == 200: strl.success("🎉 Synchronized safely under your workspace!")
+                    "chassis": chassis, "mcu": mcu, "motors": motors, "drivers": drivers, "sensors": sensors,
+                    "firmware": firmware_code, "budget_json": json.dumps(budget_list)
+                }
+                
+                # Bundle file buffer array context defensively
+                files_bundle = None
+                if uploaded_pdf is not None:
+                    files_bundle = {"file": (uploaded_pdf.name, uploaded_pdf.getvalue(), "application/pdf")}
+                
+                with strl.spinner("Processing RAG embeddings and uploading records..."):
+                    res = requests.post(f"{API_BASE_URL}/modules/add", data=form_payload, files=files_bundle)
+                    if res.status_code == 200:
+                        strl.success("🎉 Blueprint database asset array and PDF datasheet successfully ingested contextually!")
         elif admin_token_input != "": strl.error("🛑 Token mismatch.")
 
     # 3. AGENTIC SPRINT PLANNER
@@ -186,33 +173,6 @@ else:
         with c_e2: event_date = strl.date_input("Target Event Deadline Date", value=datetime.today())
         modules_selected = strl.multiselect("Select Registered Categories / Modules", ["Sumo Robot", "RC Car", "Robo Soccer"], default=["Sumo Robot"])
 
-        # 📅 NEW: Dynamic Universal Digital Calendar .ics File Creation Logic
-        date_str = event_date.strftime("%Y%m%d")
-        ics_data = f"""BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//Nexa Engine//NEXA CORE SaaS//EN
-BEGIN:VEVENT
-UID:sprint-{strl.session_state.team_id}-{date_str}@nexa.core
-DTSTAMP:{datetime.now().strftime('%Y%m%dT%H%M%SZ')}
-DTSTART;VALUE=DATE:{date_str}
-SUMMARY:🏁 Deadline: {event_name}
-DESCRIPTION:Autonomous Agent Strategy Execution for targets: {', '.join(modules_selected)}
-BEGIN:VALARM
-TRIGGER:-PT24H
-ACTION:DISPLAY
-DESCRIPTION:Reminder: 24 Hours until target event milestones deadline!
-END:VALARM
-END:VEVENT
-END:VCALENDAR"""
-
-        strl.download_button(
-            label="📅 Sync Target Deadline to Google Calendar (.ics File)",
-            data=ics_data,
-            file_name=f"sprint_{strl.session_state.team_id}_deadline.ics",
-            mime="text/calendar",
-            help="Download and double-click to immediately inject your competition milestones and 24-hour notification alert into your phone or PC calendar app!"
-        )
-
         strl.markdown("### 📦 3. Current Local Component Inventory")
         if "inv_rows" not in strl.session_state: strl.session_state.inv_rows = 3
         inventory_pool = []
@@ -235,11 +195,10 @@ END:VCALENDAR"""
                         }, timeout=30)
                         if agent_res.status_code == 200:
                             strl.session_state.cached_plan = agent_res.json()["sprint_plan"]
-                            strl.success("🎯 New Strategy Compiled and Synchronized in Cloud Storage!")
+                            strl.success("🎯 Strategy Compiled from RAG Dataset Insights!")
                         else: strl.error(f"❌ Error: {agent_res.text}")
                     except Exception as ex: strl.error(f"💥 Collapsed: {str(ex)}")
 
-        # 💾 Display Section (Always shows cached copy from database until explicitly regenerated)
         if strl.session_state.cached_plan:
             strl.markdown("---")
             strl.markdown("### 📋 Active Synchronized Strategic Roadmap")
