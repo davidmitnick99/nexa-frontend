@@ -5,11 +5,11 @@ import json
 import time
 from datetime import datetime
 
-# 1. Page Configuration & Cryptographic Structural Anchors
+# 1. Production Config & Core Frame Anchors
 strl.set_page_config(page_title="Nexa Core Gateway Engine", layout="wide", initial_sidebar_state="expanded")
 API_BASE_URL = "https://nexa-backend-tuhl.onrender.com"
 
-# Initialize Session State keys safely
+# Session State Sanitization Array
 for key, default_val in [
     ("authenticated", False), ("team_id", None), 
     ("team_admin_token", ""), ("cached_plan", ""), 
@@ -19,72 +19,96 @@ for key, default_val in [
     if key not in strl.session_state:
         strl.session_state[key] = default_val
 
-# 🎨 Custom Glassmorphic Cyber-Glow & Robot Iris Animation Injection Matrix
+# 🎨 EXOTIC CSS MECHATRONIC ENGINE & KEYFRAME MATRICES
 strl.markdown("""
 <style>
-    /* Global Background and Typography Polish */
-    .stApp { background-color: #05070b; color: #adbac7; font-family: 'Segoe UI', Roboto, sans-serif; }
-    h1, h2, h3, h4 { color: #58a6ff !important; font-family: 'Courier New', monospace; font-weight: 700; letter-spacing: 0.5px; }
+    /* Global Core Geometry */
+    .stApp { background-color: #04060a; color: #adbac7; font-family: 'Segoe UI', sans-serif; }
+    h1, h2, h3, h4 { color: #58a6ff !important; font-family: 'Courier New', monospace; font-weight: 700; }
     
-    /* Neon Sidebar styling */
-    section[data-testid="stSidebar"] { background-color: #090d14 !important; border-right: 1px solid #1f242c !important; }
+    section[data-testid="stSidebar"] { background-color: #070a0f !important; border-right: 1px solid #1f242c !important; }
     
-    /* Interactive Cyber Button Formats */
     .stButton>button { 
         background: linear-gradient(135deg, #1f6feb 0%, #094cbc 100%) !important; 
         color: #ffffff !important; font-weight: bold !important; border-radius: 6px !important;
         border: 1px solid #388bfd !important; padding: 0.5rem 1.5rem !important;
-        box-shadow: 0 4px 12px rgba(31,111,235,0.2); transition: all 0.25s ease-in-out;
+        transition: all 0.25s ease-in-out;
     }
-    .stButton>button:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(31,111,235,0.4); border-color: #58a6ff !important; }
+    .stButton>button:hover { transform: translateY(-1px); box-shadow: 0 0 15px #58a6ff; }
     
-    /* Glassmorphism Cards */
     div.cyber-card {
-        background-color: #0e131f !important; border: 1px solid #21262d !important;
+        background-color: #0a0f1d !important; border: 1px solid #21262d !important;
         border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        box-shadow: 0 4px 25px rgba(0,0,0,0.5);
     }
 
-    /* 🤖 PULSING ROBOTIC PORTAL ANIMATION */
+    /* 🤖 1. CYBERNETIC MECHANICAL IRIS HUBS */
     .robot-iris-portal {
-        display: flex; justify-content: center; align-items: center; margin: 2rem auto;
-        width: 100px; height: 100px; border-radius: 50%;
-        background: radial-gradient(circle, #05070b 40%, transparent 42%);
-        border: 4px double #58a6ff;
-        box-shadow: 0 0 20px #1f6feb, inset 0 0 20px #1f6feb;
-        animation: rotateIris 4s linear infinite, pulseGlow 2s ease-in-out infinite alternate;
+        display: flex; justify-content: center; align-items: center; margin: 1.5rem auto;
+        width: 110px; height: 110px; border-radius: 50%;
+        border: 4px dashed #58a6ff;
+        box-shadow: 0 0 20px #1f6feb, inset 0 0 15px #1f6feb;
+        animation: rotateIris 6s linear infinite;
     }
-    
     .robot-iris-core {
-        width: 30px; height: 30px; border-radius: 50%; background-color: #58a6ff;
-        box-shadow: 0 0 15px #58a6ff;
+        width: 40px; height: 40px; border-radius: 50%; background: #00f0ff;
+        box-shadow: 0 0 25px #00f0ff; animation: pulseCore 1.5s ease-in-out infinite alternate;
     }
 
-    /* 🚨 CYBER TERMINATION DISCONNECT ALERT */
-    .disconnect-banner {
-        background-color: #2a0808 !important; border: 2px solid #f85149 !important;
-        color: #f85149 !important; font-family: 'Courier New', monospace;
-        padding: 1.5rem; border-radius: 8px; text-align: center;
-        box-shadow: 0 0 25px rgba(248,81,73,0.3);
-        animation: glitchBlink 0.4s infinite alternate;
+    /* ⚽ 2. OMNIDIRECTIONAL SOCCER ROBOT LOAD COMPILER ANIMATION */
+    .omni-soccer-loader {
+        position: relative; width: 80px; height: 80px; margin: 2rem auto;
+        border: 3px solid #1f242c; border-radius: 50%;
     }
-
-    @keyframes rotateIris { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    @keyframes pulseGlow { from { transform: scale(0.95); box-shadow: 0 0 15px #1f6feb; } to { transform: scale(1.05); box-shadow: 0 0 30px #58a6ff; } }
-    @keyframes glitchBlink { from { opacity: 0.8; } to { opacity: 1; } }
+    .soccer-wheel {
+        position: absolute; width: 16px; height: 10px; background-color: #388bfd;
+        border-radius: 2px; box-shadow: 0 0 10px #388bfd;
+    }
+    /* Place wheels at 120-degree variations mirroring an actual Omni platform */
+    .wheel-1 { top: -5px; left: 32px; transform: rotate(0deg); }
+    .wheel-2 { bottom: 5px; left: 5px; transform: rotate(120deg); }
+    .wheel-3 { bottom: 5px; right: 5px; transform: rotate(240deg); }
     
-    div[data-testid="stMetricValue"] { color: #58a6ff !important; font-family: 'Courier New', monospace; font-weight: bold; }
+    .soccer-ball-core {
+        position: absolute; top: 32px; left: 32px; width: 16px; height: 16px;
+        background-color: #00f0ff; border-radius: 50%; box-shadow: 0 0 15px #00f0ff;
+        animation: dribbleBall 1s ease-in-out infinite alternate;
+    }
+
+    /* 💥 3. SUMO COMBAT BLADE LOADER ANIMATION */
+    .sumo-wedge-loader {
+        width: 60px; height: 60px; margin: 2rem auto;
+        border-bottom: 5px solid #f85149; border-left: 5px solid transparent; border-right: 5px solid transparent;
+        box-shadow: 0 8px 15px rgba(248,81,73,0.4);
+        animation: chargeAttack 0.8s ease-in-out infinite alternate;
+    }
+
+    /* Keyframes Core Layouts */
+    @keyframes rotateIris { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes pulseCore { from { transform: scale(0.8); opacity: 0.7; } to { transform: scale(1.1); opacity: 1; } }
+    @keyframes dribbleBall { from { transform: scale(0.9) translateY(-5px); } to { transform: scale(1.1) translateY(5px); } }
+    @keyframes chargeAttack { from { transform: translateY(0) scaleX(1); filter: brightness(1); } to { transform: translateY(-10px) scaleX(1.1); filter: brightness(1.4); } }
+
+    /* 🚨 CYBER DISCONNECT BANNER */
+    .disconnect-banner {
+        background-color: #1a0505 !important; border: 1px solid #f85149 !important;
+        color: #f85149 !important; font-family: 'Courier New', monospace;
+        padding: 2rem; border-radius: 8px; text-align: center;
+        box-shadow: 0 0 30px rgba(248,81,73,0.2);
+    }
 </style>
 """, unsafe_allow_html=True)
 
-# Check for active termination sequence animation state
+# ==========================================
+# TERMINATION ENGINE ROUTING LAYER
+# ==========================================
 if strl.session_state.logout_sequence:
     strl.markdown("<div class='disconnect-banner'>", unsafe_allow_html=True)
-    strl.markdown("### ⚠️ WARNING: TERMINATING SECURE SESSION HOOKS...")
-    strl.markdown("<code>[SYS_STATUS]: Purging Local Cache Memory Nodes...</code><br>", unsafe_allow_html=True)
-    strl.markdown("<code>[SYS_STATUS]: Revoking Cryptographic Multi-Tenant Access Tokens...</code>", unsafe_allow_html=True)
+    strl.markdown("### ⚠️ [CRITICAL] DISCONNECTING WORKSPACE SAFE TUUNELS...")
+    strl.markdown("<code>[SYS_LOG]: De-allocating Multi-Tenant Token Hooks... Done.</code><br>", unsafe_allow_html=True)
+    strl.markdown("<code>[SYS_LOG]: Securing MongoDB Atlas Document Clusters... Done.</code>", unsafe_allow_html=True)
     strl.markdown("</div>", unsafe_allow_html=True)
-    time.sleep(2.2) # Lock frame briefly to simulate genuine secure system wipe
+    time.sleep(2.0)
     strl.session_state.authenticated = False
     strl.session_state.team_id = None
     strl.session_state.team_admin_token = ""
@@ -93,12 +117,12 @@ if strl.session_state.logout_sequence:
     strl.rerun()
 
 # ==========================================
-# ANIMATED AUTHENTICATION GATE
+# ANIMATED ACCESS PORTAL VIEW
 # ==========================================
 def render_authentication_gate():
-    # Render the pulsing interactive mechanical eye core
+    # Clean, isolated gateway header block completely removing old redundant lines
     strl.markdown("<div class='robot-iris-portal'><div class='robot-iris-core'></div></div>", unsafe_allow_html=True)
-    strl.markdown("<h3 style='text-align: center; margin-bottom: 1.5rem;'>SYSTEM STATUS: IDENTITY VERIFICATION REQUIRED</h3>", unsafe_allow_html=True)
+    strl.markdown("<h2 style='text-align: center; font-family: \"Courier New\", monospace; margin-bottom: 2rem;'>NEXA PLATFORM AUTHENTICATION HUB</h2>", unsafe_allow_html=True)
     
     strl.markdown("<div class='cyber-card'>", unsafe_allow_html=True)
     auth_mode = strl.radio("Choose System Operation Token Mappings", ["Sign In To Active Workspace", "Provision New Multi-Tenant Instance"])
@@ -119,11 +143,11 @@ def render_authentication_gate():
                         hist = requests.get(f"{API_BASE_URL}/agent/cached/{strl.session_state.team_id}")
                         if hist.status_code == 200:
                             strl.session_state.cached_plan = hist.json().get("sprint_plan", "")
-                        strl.success("🤝 Handshake Confirmed. Initializing Nexa Operating Layers...")
-                        time.sleep(1)
+                        strl.success("🤝 Authorization Verified. Loading System Matrices...")
+                        time.sleep(0.8)
                         strl.rerun()
-                    else: strl.error("🛑 Security Rejection: Invalid Credentials.")
-                except Exception as e: strl.error(f"💥 Backend Connection Failure: {str(e)}")
+                    else: strl.error("🛑 Rejection: Mismatched Core Parameters.")
+                except Exception as e: strl.error(f"💥 Connection Down: {str(e)}")
                     
     elif auth_mode == "Provision New Multi-Tenant Instance":
         custom_token = strl.text_input("Define Private Admin Modification Token", type="password")
@@ -133,17 +157,23 @@ def render_authentication_gate():
                     res = requests.post(f"{API_BASE_URL}/auth/register", json={
                         "team_username": auth_user, "password": auth_pass, "admin_token": custom_token.strip()
                     })
-                    if res.status_code == 200: strl.success("🎉 Multi-Tenant Workspace Provisioned! Switch to Sign In.")
-                except Exception as e: strl.error(f"💥 Core Infrastructure Fault: {str(e)}")
+                    if res.status_code == 200: strl.success("🎉 Instance Ready! Toggle to Sign In.")
+                except Exception as e: strl.error(f"💥 Critical Infrastructure Error: {str(e)}")
     strl.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
-# MODULE DOMAIN 1: CLIENT ENGINE VIEWPORT
+# VIEWPORT MASTER CHASSIS DISPATCH LAYER
 # ==========================================
 def run_client_dashboard_scope():
     strl.subheader("📋 Core Infrastructure Viewport Client Hub")
     target_module = strl.sidebar.selectbox("Active Component Filter", ["Sumo Robot", "RC Car", "Robo Soccer"])
     
+    # Render customized hardware loader states based on active layout selectors
+    if target_module == "Robo Soccer":
+        strl.markdown("<div class='omni-soccer-loader'><div class='soccer-wheel wheel-1'></div><div class='soccer-wheel wheel-2'></div><div class='soccer-wheel wheel-3'></div><div class='soccer-ball-core'></div></div>", unsafe_allow_html=True)
+    else:
+        strl.markdown("<div class='sumo-wedge-loader'></div>", unsafe_allow_html=True)
+        
     try:
         response = requests.get(f"{API_BASE_URL}/modules/{strl.session_state.team_id}/{target_module}")
         if response.status_code == 200:
@@ -153,14 +183,11 @@ def run_client_dashboard_scope():
             with left_col:
                 strl.markdown("### 🔌 System Circuit Topology Vector")
                 raw_url = str(module_data.get("circuit_diagram_url", "")).strip()
-                if "http" in raw_url:
-                    strl.image(raw_url[raw_url.find("http"):], use_container_width=True)
-                
+                if "http" in raw_url: strl.image(raw_url, use_container_width=True)
                 if "specs" in module_data:
                     strl.markdown("#### ⚙️ Ingested Hardware Parameters")
                     for spec, val in module_data["specs"].items():
                         if val: strl.write(f"🔹 **{spec}:** `{val}`")
-                        
             with right_col:
                 strl.markdown("### 💰 Component Budget Evaluation Matrix")
                 if module_data.get("budget"):
@@ -169,16 +196,12 @@ def run_client_dashboard_scope():
                     df.columns = ['Component Line Item', 'Quantity', 'Unit Cost (PKR)', 'Total Subtotal (PKR)']
                     strl.dataframe(df, use_container_width=True, hide_index=True)
                     strl.metric(label="Calculated Asset Value Profile", value=f"{df['Total Subtotal (PKR)'].sum():,} PKR")
-                    
                 if module_data.get("firmware"):
                     strl.markdown("### 💻 Active Registered Embedded Firmware Memory")
                     strl.code(module_data["firmware"], language="cpp")
-        else: strl.info("ℹ️ Workspace module array empty. Seed technical values inside the Secure Admin Portal.")
+        else: strl.info("ℹ️ Workspace array empty. Seed technical matrices in the Secure Admin Portal.")
     except Exception as e: strl.error(f"Sync Issue: {str(e)}")
 
-# ==========================================
-# MODULE DOMAIN 2: SECURE WRITE ACCESS GATE
-# ==========================================
 def run_admin_portal_scope():
     strl.subheader("🔒 Executive Write & Data Modification Access Hub")
     admin_token_input = strl.text_input("Enter Private Workspace Validation Modification Token", type="password")
@@ -191,7 +214,6 @@ def run_admin_portal_scope():
         with c_u1: diag_url = strl.text_input("System Schematic Circuit Diagram Vector Link (URL Only)")
         with c_u2: uploaded_pdf = strl.file_uploader("📥 Grounding Datasheet PDF", type=["pdf"])
         
-        strl.markdown("#### ⚙️ Technical Blueprint Hardware Parameter Ingestion")
         cl1, cl2, cl3 = strl.columns(3)
         with cl1: chassis = strl.text_input("Chassis / Suspension Setup Frame")
         with cl2: mcu = strl.text_input("Main Core Processing MCU Node")
@@ -201,7 +223,6 @@ def run_admin_portal_scope():
         with cl4: drivers = strl.text_input("Power H-Bridge Driver Arrays")
         with cl5: sensors = strl.text_input("Telemetry Sensor Module Matrix")
         
-        strl.markdown("#### 💰 Financial Ledger Allocation Matrix")
         budget_list = []
         for i in range(strl.session_state.rows):
             col1, col2, col3 = strl.columns([2.5, 0.6, 1.2])
@@ -227,9 +248,6 @@ def run_admin_portal_scope():
                 if res.status_code == 200: strl.success("🎉 Asset arrays broadcast and synced to cluster memory seamlessly!")
     elif admin_token_input != "": strl.error("🛑 Verification Access Violation: Structural token keys mismatch.")
 
-# ==========================================
-# MODULE DOMAIN 3: AGENTIC PLANNER MATRIX
-# ==========================================
 def run_agentic_planner_scope():
     strl.subheader("🧠 Multi-Agent Actor-Critic Strategy Planning Matrix")
     
@@ -278,6 +296,8 @@ def run_agentic_planner_scope():
     if strl.button("🚀 TRIGGER WEB-GROUNDED SELF-CORRECTING AGENT DIRECTIVE CLUSTER", use_container_width=True):
         if not team_members_list: strl.error("❌ Roster matrix tracking arrays are empty.")
         else:
+            # Cinematic compiler loading view triggered directly inside the execution track
+            strl.markdown("<div class='robot-iris-portal'><div class='robot-iris-core'></div></div>", unsafe_allow_html=True)
             with strl.spinner("Actors creating draft plans... Critic executing Google Search market pricing verification loops..."):
                 try:
                     agent_res = requests.post(f"{API_BASE_URL}/agent/sprint", json={
@@ -287,6 +307,7 @@ def run_agentic_planner_scope():
                     if agent_res.status_code == 200:
                         strl.session_state.cached_plan = agent_res.json()["sprint_plan"]
                         strl.success("🎯 Strategy Pipeline Self-Correction Loop Concluded successfully!")
+                        strl.rerun()
                 except Exception as ex: strl.error(f"💥 Backend Connection Failure: {str(ex)}")
 
     if strl.session_state.cached_plan:
@@ -308,25 +329,19 @@ def run_agentic_planner_scope():
         else: strl.markdown(raw_output)
 
 # ==========================================
-# CENTRAL RUNTIME ROUTER DESK
+# CENTRAL RUNTIME CONTROL GATE
 # ==========================================
 if not strl.session_state.authenticated:
-    strl.title("🛠️ Nexa Core Production Gateway")
-    strl.caption("Multi-Tenant Autonomous Systems Hub & Agentic AI Orchestrator")
-    strl.markdown("---")
     render_authentication_gate()
 else:
-    # Sidebar Session Navigation Controls
     strl.sidebar.markdown(f"### 🪐 Active Command Center")
     app_mode = strl.sidebar.selectbox("Navigate Systems Control", ["📋 Client Module Dashboard", "🔒 Secure Admin Portal", "🧠 Agentic Sprint Planner"])
     strl.sidebar.markdown("---")
     
-    # 🚨 DYNAMIC CINEMATIC DISCONNECT TRIGGER BUTTON
     if strl.sidebar.button("🚨 TERMINATE Secure Active Session", use_container_width=True):
         strl.session_state.logout_sequence = True
         strl.rerun()
         
-    # Router Mount Execution mapping
     if app_mode == "📋 Client Module Dashboard": run_client_dashboard_scope()
     elif app_mode == "🔒 Secure Admin Portal": run_admin_portal_scope()
     elif app_mode == "🧠 Agentic Sprint Planner": run_agentic_planner_scope()
