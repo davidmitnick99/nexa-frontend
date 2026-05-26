@@ -300,8 +300,8 @@ def run_admin_portal_scope():
         mod_name = st.selectbox("SELECT SUBSYSTEM MEMORY BUFFER RECEPTACLE", ["Sumo Robot", "RC Car", "Robo Soccer"])
         
         c_u1, c_u2 = st.columns([2, 1])
-        with c_u1: diag_url = strl.text_input("SCHEMATIC TOPOLOGY LINK (URL)")
-        with c_u2: uploaded_pdf = st.file_uploader("📥 INGEST GROUNDING PDF DATA SHEET", type=["pdf"])
+        with c_u1: diag_url = st.text_input("SCHEMATIC TOPOLOGY LINK (URL)")  # <-- CHANGED TO st
+        with c_u2: uploaded_pdf = st.file_uploader("📥 INGEST GROUNDING PDF DATA SHEET", type=["pdf"]) # <-- CHANGED TO st
         
         cl1, cl2, cl3 = st.columns(3)
         with cl1: chassis = st.text_input("CHASSIS FRAME GEOMETRY")
