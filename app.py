@@ -143,49 +143,45 @@ def open_public_community_dialog():
     tab_write, tab_delete = strl.tabs(["✏️ Broadcast Solution Profile", "🗑️ Revoke Entry Document"])
     
     with tab_write:
-        # Enclose the input states inside a production Form block to freeze context windows
-        with strl.form("community_input_form", clear_on_submit=True):
-            scrapped_text = strl.text_area("Describe your available scrap component or hardware problem parameters:")
-            target_mcu = strl.text_input("Target Microcontroller Core System", value="Arduino Uno / ESP32")
-            author_sig = strl.text_input("Enter Secret Author Signature Name (Stored anonymously as sha256)", type="password")
-            
-            submit_btn = strl.form_submit_button("🛰️ BROADCAST TO COMMUNITY LEDGER", use_container_width=True)
-            
-            if submit_btn:
-                if not scrapped_text.strip() or not author_sig.strip():
-                    strl.error("❌ Problem logs and Signature keys are required parameters.")
-                else:
-                    # Execute network calls inside the form structure to keep the dialog frame active
-                    with strl.spinner("Invoking web-grounded community sub-agents..."):
-                        try:
-                            res = requests.post(f"{API_BASE_URL}/public/community/resolve", json={
-                                "scrapped_component_text": scrapped_text, "target_mcu": target_mcu, "author_signature": author_sig
-                            })
-                            if res.status_code == 200:
-                                strl.success(f"🎉 SECURE MEMORY SYNCED: Assigned ID: {res.json()['comment_id']}")
-                                time.sleep(2)
-                                strl.rerun()
-                        except Exception as e: strl.error(f"💥 Ground Link Down: {str(e)}")
+        scrapped_text = strl.text_area("Describe your available scrap component or hardware problem parameters:", key="input_prob_txt")
+        target_mcu = strl.text_input("Target Microcontroller Core System", value="Arduino Uno / ESP32", key="input_mcu_txt")
+        strl.markdown("🔒 *Enter your signature token to manage or delete this post later anonymously.*")
+        author_sig = strl.text_input("Enter Secret Author Signature Name (Stored anonymously as sha256)", type="password", key="input_sig_txt")
+        
+        if strl.button("🛰️ BROADCAST TO COMMUNITY LEDGER", use_container_width=True, key="submit_broadcast_btn"):
+            if not scrapped_text.strip() or not author_sig.strip():
+                strl.error("❌ Problem logs and Signature keys are required parameters.")
+            else:
+                with strl.spinner("Invoking web-grounded community sub-agents..."):
+                    try:
+                        res = requests.post(f"{API_BASE_URL}/public/community/resolve", json={
+                            "scrapped_component_text": scrapped_text, "target_mcu": target_mcu, "author_signature": author_sig
+                        })
+                        if res.status_code == 200:
+                            strl.success(f"🎉 SECURE MEMORY SYNCED: Assigned ID: {res.json()['comment_id']}")
+                            time.sleep(1.5)
+                            # 🔥 CRITICAL UPGRADE: Force a full script compilation at the APP layer scope
+                            strl.rerun(scope="app")
+                    except Exception as e: strl.error(f"💥 Ground Link Down: {str(e)}")
 
     with tab_delete:
-        with strl.form("community_delete_form", clear_on_submit=True):
-            target_comm_id = strl.text_input("Enter Target Component Document ID to Delete")
-            confirm_sig = strl.text_input("Confirm Secret Author Signature Name to Verify Ownership", type="password")
-            delete_btn = strl.form_submit_button("🚨 PERMANENTLY PURGE DOCUMENT RECORD", use_container_width=True)
-            
-            if delete_btn:
-                if target_comm_id.strip() and confirm_sig.strip():
-                    with strl.spinner("Verifying signatures and purging record..."):
-                        try:
-                            del_res = requests.post(f"{API_BASE_URL}/public/community/delete", json={
-                                "comment_id": target_comm_id, "author_signature": confirm_sig
-                            })
-                            if del_res.status_code == 200:
-                                strl.success("🚨 Post wiped successfully from cloud registers!")
-                                time.sleep(1.5)
-                                strl.rerun()
-                            else: strl.error("🛑 Deletion Rejected: Key mismatch.")
-                        except Exception as e: strl.error(f"💥 Error: {str(e)}")
+        target_comm_id = strl.text_input("Enter Target Component Document ID to Delete", key="input_del_id")
+        confirm_sig = strl.text_input("Confirm Secret Author Signature Name to Verify Ownership", type="password", key="input_del_sig")
+        
+        if strl.button("🚨 PERMANENTLY PURGE DOCUMENT RECORD", use_container_width=True, key="submit_purge_btn"):
+            if target_comm_id.strip() and confirm_sig.strip():
+                with strl.spinner("Verifying signatures and purging record..."):
+                    try:
+                        del_res = requests.post(f"{API_BASE_URL}/public/community/delete", json={
+                            "comment_id": target_comm_id, "author_signature": confirm_sig
+                        })
+                        if del_res.status_code == 200:
+                            strl.success("🚨 Post wiped successfully from cloud registers!")
+                            time.sleep(1.5)
+                            # 🔥 CRITICAL UPGRADE: Force a full script compilation at the APP layer scope
+                            strl.rerun(scope="app")
+                        else: strl.error("🛑 Deletion Rejected: Key mismatch.")
+                    except Exception as e: strl.error(f"💥 Error: {str(e)}")
 
 # ==========================================
 # 📟 RUN-TIME DIAGNOSTICS DIALOG BOX MODAL
