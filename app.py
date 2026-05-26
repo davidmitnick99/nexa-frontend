@@ -24,7 +24,6 @@ strl.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap');
 
-    /* 🌌 Dynamic Animated Matrix Space Grid Background */
     .stApp { 
         background: radial-gradient(circle at center, #060b16 0%, #020408 100%) !important;
         background-image: linear-gradient(rgba(18, 30, 49, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(18, 30, 49, 0.1) 1px, transparent 1px) !important;
@@ -34,17 +33,13 @@ strl.markdown("""
         animation: gridScroll 20s linear infinite;
     }
     
-    @keyframes gridScroll {
-        from { background-position: 0 0; }
-        to { background-position: 0 600px; }
-    }
+    @keyframes gridScroll { from { background-position: 0 0; } to { background-position: 0 600px; } }
 
     h1, h2, h3, h4 { 
         font-family: 'Orbitron', sans-serif !important; 
         color: #00f0ff !important; 
         text-shadow: 0 0 10px rgba(0, 240, 255, 0.6) !important;
-        font-weight: 700 !important;
-        letter-spacing: 2px !important;
+        font-weight: 700 !important; letter-spacing: 2px !important;
     }
     
     section[data-testid="stSidebar"] { 
@@ -58,25 +53,20 @@ strl.markdown("""
         color: #ffffff !important; font-family: 'Orbitron', sans-serif !important;
         font-weight: bold !important; border-radius: 4px !important;
         border: 1px solid #00f0ff !important; padding: 0.6rem 2rem !important;
-        text-shadow: 0 0 5px #00f0ff;
-        box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+        text-shadow: 0 0 5px #00f0ff; box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
         transition: all 0.3s ease-in-out;
     }
     .stButton>button:hover { transform: scale(1.02); box-shadow: 0 0 25px #00f0ff; background: #00f0ff !important; color: #060b16 !important; }
     
     div.cyber-card {
         background: rgba(10, 15, 29, 0.75) !important; 
-        border: 1px solid #00f0ff !important;
-        border-radius: 6px; padding: 2rem; margin-bottom: 1.5rem;
-        box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
-        backdrop-filter: blur(10px);
+        border: 1px solid #00f0ff !important; border-radius: 6px; padding: 2rem; margin-bottom: 1.5rem;
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.1); backdrop-filter: blur(10px);
     }
 
-    /* 🤖 AUTOMATED MECHANICAL IRIS GATE */
     .robot-iris-portal {
         display: flex; justify-content: center; align-items: center; margin: 1.5rem auto;
-        width: 100px; height: 100px; border-radius: 50%;
-        border: 3px dashed #00f0ff;
+        width: 100px; height: 100px; border-radius: 50%; border: 3px dashed #00f0ff;
         box-shadow: 0 0 20px rgba(0, 240, 255, 0.4), inset 0 0 15px rgba(0, 240, 255, 0.4);
         animation: spinControl 8s linear infinite;
     }
@@ -85,7 +75,6 @@ strl.markdown("""
         box-shadow: 0 0 20px #00f0ff; animation: pulseCore 1s ease-in-out infinite alternate;
     }
 
-    /* ⚽ ROBOTIC SOCCER RADAR SCREEN */
     .soccer-blueprint-arena {
         position: relative; width: 150px; height: 150px; margin: 1.5rem auto;
         border: 2px solid rgba(0, 240, 255, 0.3); border-radius: 50%;
@@ -93,34 +82,26 @@ strl.markdown("""
     }
     .soccer-radar-line {
         position: absolute; width: 50%; height: 2px; background: linear-gradient(90deg, #00f0ff, transparent);
-        top: 50%; left: 50%; transform-origin: left center;
-        animation: radarSweep 2.5s linear infinite;
+        top: 50%; left: 50%; transform-origin: left center; animation: radarSweep 2.5s linear infinite;
     }
     .soccer-omni-wheel {
-        position: absolute; width: 22px; height: 12px; background: #00f0ff;
-        border-radius: 3px; box-shadow: 0 0 12px #00f0ff;
+        position: absolute; width: 22px; height: 12px; background: #00f0ff; border-radius: 3px; box-shadow: 0 0 12px #00f0ff;
     }
     .sw-1 { top: 5px; left: 64px; transform: rotate(0deg); }
     .sw-2 { bottom: 15px; left: 15px; transform: rotate(120deg); }
     .sw-3 { bottom: 15px; right: 15px; transform: rotate(240deg); }
 
-    /* 💥 SUMO COMBAT TELEMETRY INTERFACE */
     .sumo-combat-telemetry {
-        position: relative; width: 140px; height: 90px; margin: 2rem auto;
-        border: 2px solid #ff0055; border-radius: 4px;
-        background: linear-gradient(0deg, rgba(255,0,85,0.05) 0%, transparent 100%);
-        box-shadow: 0 0 20px rgba(255,0,85,0.2);
+        position: relative; width: 140px; height: 90px; margin: 2rem auto; border: 2px solid #ff0055; border-radius: 4px;
+        background: linear-gradient(0deg, rgba(255,0,85,0.05) 0%, transparent 100%); box-shadow: 0 0 20px rgba(255,0,85,0.2);
     }
     .sumo-attack-wedge {
         position: absolute; bottom: 0; left: 20px; width: 100px; height: 0;
         border-bottom: 30px solid #ff0055; border-left: 15px solid transparent; border-right: 15px solid transparent;
-        filter: drop-shadow(0 0 10px #ff0055);
-        animation: wedgeOscillate 0.6s ease-in-out infinite alternate;
+        filter: drop-shadow(0 0 10px #ff0055); animation: wedgeOscillate 0.6s ease-in-out infinite alternate;
     }
     .sumo-laser-line {
-        position: absolute; width: 100%; height: 2px; background-color: #ff0055;
-        box-shadow: 0 0 10px #ff0055; top: 20px;
-        animation: laserScan 1.5s ease-in-out infinite alternate;
+        position: absolute; width: 100%; height: 2px; background-color: #ff0055; box-shadow: 0 0 10px #ff0055; top: 20px; animation: laserScan 1.5s ease-in-out infinite alternate;
     }
 
     @keyframes spinControl { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -130,17 +111,12 @@ strl.markdown("""
     @keyframes laserScan { from { top: 10px; } to { top: 80px; } }
 
     .disconnect-banner {
-        background-color: #1a020c !important; border: 2px solid #ff0055 !important;
-        color: #ff0055 !important; font-family: 'Share Tech Mono', monospace;
-        padding: 2.5rem; border-radius: 4px; text-align: center;
-        box-shadow: 0 0 40px rgba(255,0,85,0.3);
+        background-color: #1a020c !important; border: 2px solid #ff0055 !important; color: #ff0055 !important;
+        font-family: 'Share Tech Mono', monospace; padding: 2.5rem; border-radius: 4px; text-align: center; box-shadow: 0 0 40px rgba(255,0,85,0.3);
     }
     
-    /* Dialog Overlay overrides to match the custom dark aesthetic */
     div[data-testid="stDialog"] div[role="dialog"] {
-        background-color: #070b12 !important;
-        border: 2px solid #00f0ff !important;
-        box-shadow: 0 0 30px #00f0ff;
+        background-color: #050912 !important; border: 2px solid #00f0ff !important; box-shadow: 0 0 30px #00f0ff;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -149,10 +125,8 @@ strl.markdown("""
 if strl.session_state.logout_sequence:
     strl.markdown("<div class='disconnect-banner'>", unsafe_allow_html=True)
     strl.markdown("### ⚠️ [SECURITY] DISCONNECTING NEXA COMMAND CORE HIVE...")
-    strl.markdown("<code>[CRITICAL]: Revoking secure WebSocket channels... Approved.</code><br>", unsafe_allow_html=True)
-    strl.markdown("<code>[CRITICAL]: Purging runtime tenant document buffer caches... Done.</code>", unsafe_allow_html=True)
     strl.markdown("</div>", unsafe_allow_html=True)
-    time.sleep(2.2)
+    time.sleep(1.5)
     strl.session_state.authenticated = False
     strl.session_state.team_id = None
     strl.session_state.team_admin_token = ""
@@ -166,25 +140,50 @@ if strl.session_state.logout_sequence:
 @strl.dialog("🌍 GLOBAL COMMUNITY SOLUTIONS MATRIX")
 def open_public_community_dialog():
     strl.markdown("<div class='robot-iris-portal'><div class='robot-iris-core'></div></div>", unsafe_allow_html=True)
-    strl.caption("Democratizing robotics hardware solutions across Pakistani student incubation spaces natively.")
-    strl.markdown("---")
     
-    scrapped_text = strl.text_area("Describe your available scrap component or driver parameters:", placeholder="e.g., Green motor board with 4 pins and a big heat sink salvaged from an old printer...")
-    target_mcu = strl.text_input("Target Microcontroller Core System", value="Arduino Uno / ESP32")
+    tab_write, tab_delete = strl.tabs(["✏️ Broadcast Solution Profile", "🗑️ Revoke Entry Document"])
     
-    if strl.button("🛰️ SUBMIT TO COMMUNITY AGENT HIVE", use_container_width=True):
-        if not scrapped_text.strip():
-            strl.error("❌ Context payload string cannot be empty.")
-        else:
-            with strl.spinner("Invoking web-grounded community sub-agents..."):
-                try:
-                    res = requests.post(f"{API_BASE_URL}/public/community/resolve", json={
-                        "scrapped_component_text": scrapped_text, "target_mcu": target_mcu
-                    })
-                    if res.status_code == 200:
-                        strl.success("🎯 Guidance Matrix Compiled:")
-                        strl.markdown(res.json()["mentor_guidance"])
-                except Exception as e: strl.error(f"💥 Ground Link Down: {str(e)}")
+    with tab_write:
+        scrapped_text = strl.text_area("Describe your available scrap component or hardware problem parameters:", key="write_scrapped_val")
+        target_mcu = strl.text_input("Target Microcontroller Core System", value="Arduino Uno / ESP32", key="write_mcu_val")
+        
+        strl.markdown("🔒 *Enter your signature token to manage or delete this post later anonymously.*")
+        author_sig = strl.text_input("Enter Secret Author Signature Name (Will not be displayed publicly)", type="password", key="write_sig_val")
+        
+        if strl.button("🛰️ BROADCAST TO COMMUNITY LEDGER", use_container_width=True):
+            if not scrapped_text.strip() or not author_sig.strip():
+                strl.error("❌ Problem logs and Signature keys are required parameters.")
+            else:
+                with strl.spinner("Invoking web-grounded community sub-agents..."):
+                    try:
+                        res = requests.post(f"{API_BASE_URL}/public/community/resolve", json={
+                            "scrapped_component_text": scrapped_text, "target_mcu": target_mcu, "author_signature": author_sig
+                        })
+                        if res.status_code == 200:
+                            strl.success(f"🎉 Solution successfully ledgered into the cluster! Assigned ID: {res.json()['comment_id']}")
+                            time.sleep(1.2)
+                            strl.rerun()
+                    except Exception as e: strl.error(f"💥 Ground Link Down: {str(e)}")
+
+    with tab_delete:
+        target_comm_id = strl.text_input("Enter Target Component Document ID to Delete", key="del_id_val")
+        confirm_sig = strl.text_input("Confirm Secret Author Signature Name to Verify Ownership", type="password", key="del_sig_val")
+        
+        if strl.button("🚨 PERMANENTLY PURGE DOCUMENT RECORD", use_container_width=True):
+            if not target_comm_id.strip() or not confirm_sig.strip():
+                strl.error("❌ Both verification anchors are required to execute a wipe sequence.")
+            else:
+                with strl.spinner("Verifying cryptographic token alignment signatures..."):
+                    try:
+                        del_res = requests.post(f"{API_BASE_URL}/public/community/delete", json={
+                            "comment_id": target_comm_id, "author_signature": confirm_sig
+                        })
+                        if del_res.status_code == 200:
+                            strl.success("🚨 Handshake Verified. Post successfully wiped from cloud registers!")
+                            time.sleep(1.2)
+                            strl.rerun()
+                        else: strl.error("🛑 Deletion Rejected: Invalid signature or Document ID mismatch.")
+                    except Exception as e: strl.error(f"💥 Link Down: {str(e)}")
 
 # ==========================================
 # 📟 RUN-TIME DIAGNOSTICS DIALOG BOX MODAL
@@ -200,8 +199,7 @@ def open_hardware_diagnostics_dialog():
     raw_logs = strl.text_area("Paste Raw Serial Monitor Hex Arrays / Compiler Crash Stack Traces", height=100)
     
     if strl.button("⚡ EXECUTE REAL-TIME RADAR INTERCEPT", use_container_width=True):
-        if not symptom.strip():
-            strl.error("❌ Symptom markers require string inputs.")
+        if not symptom.strip(): strl.error("❌ Symptom markers require string inputs.")
         else:
             with strl.spinner("Isolating telemetry vectors against RAG grounding registers..."):
                 try:
@@ -257,10 +255,25 @@ def render_authentication_gate():
                 except Exception as e: strl.error("💥 Network Anomaly.")
     strl.markdown("</div>", unsafe_allow_html=True)
     
-    # 🌍 Sleek, unified open-access community button trigger
-    strl.markdown("<h4 style='text-align: center; margin-top: 2rem;'>💡 OPEN ACCESS UTILITIES</h4>", unsafe_allow_html=True)
-    if strl.button("🌍 ACCESS GLOBAL COMMUNITY SOLUTIONS NETWORK", use_container_width=True):
+    # 🌍 Sleek, unified open-access community buttons
+    strl.markdown("<h4 style='text-align: center; margin-top: 2rem;'>💡 PUBLIC COMMUNITY DEPLOYMENTS</h4>", unsafe_allow_html=True)
+    if strl.button("🌍 ACCESS GLOBAL COMMUNITY TERMINAL INTERFACE", use_container_width=True):
         open_public_community_dialog()
+        
+    # 🏁 LIVE CROWDSOURCED COMMUNITY WORKSPACE FEED
+    strl.markdown("### 📡 Active Community Intelligence Ledger Feed")
+    try:
+        feed_res = requests.get(f"{API_BASE_URL}/public/community/all")
+        if feed_res.status_code == 200:
+            posts = feed_res.json().get("posts", [])
+            if not posts:
+                strl.info("ℹ️ Community ledger is currently empty. Be the first to broadcast a mechatronics issue mapping above!")
+            for post in posts:
+                with strl.expander(f"📦 MODULE ISSUE ID: {post['comment_id']} | Target MCU: {post['target_mcu']} ({post['timestamp']})"):
+                    strl.markdown(f"**Student Hardware Scenario Description:**\n`{post['scrapped_component_text']}`")
+                    strl.markdown("---")
+                    strl.markdown(f"**Nexa Agentic Mentorship Output Solutions:**\n{post['mentor_guidance']}")
+    except Exception as f_err: strl.error(f"Feed error: {str(f_err)}")
 
 # ==========================================
 # MODULE VIEWPORT AUTHENTICATED DOMAINS
@@ -350,10 +363,8 @@ def run_admin_portal_scope():
 def run_agentic_planner_scope():
     strl.markdown("<h2>🧠 AGENTIC SPRINT CONTEXT ORCHESTRATION HIVE</h2>", unsafe_allow_html=True)
     
-    # Clean, elegant button mapping layout to house the diagnostics trigger option
     col_l, col_r = strl.columns([2, 1])
-    with col_l:
-        strl.markdown("### 📋 ACTIVE CORE TRACKER OPERATORS")
+    with col_l: strl.markdown("### 📋 ACTIVE CORE TRACKER OPERATORS")
     with col_r:
         if strl.button("📟 ACTIVATE DIAGNOSTIC TERMINAL HUD", use_container_width=True):
             open_hardware_diagnostics_dialog()
@@ -382,7 +393,7 @@ def run_agentic_planner_scope():
     modules_selected = strl.multiselect("BLUEPRINT TRACKING CONSTRAINTS LOADED", ["Sumo Robot", "RC Car", "Robo Soccer"], default=["Sumo Robot"])
 
     date_str = event_date.strftime("%Y%m%d")
-    ics_data = f"BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nDTSTART;VALUE=DATE:{date_str}\nSUMMARY:🏁 Target: {event_name}\nBEGIN:VALARM\nTRIGGER:-PT24H\nACTION:DISPLAY\nEND:VALARM\nEND:VEVENT\nEND:VCALENDAR"
+    ics_data = f"BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nDTSTART;VALUE=DATE:{date_str}\nSUMMARY:🏁 Target: {event_name}\nEND:VEVENT\nEND:VCALENDAR"
 
     strl.download_button(
         label="📅 INJECT ACTIVE MILESTONES DIRECTLY INTO PERSONAL DEVICE CALENDAR (.ics)",
@@ -403,7 +414,7 @@ def run_agentic_planner_scope():
     if strl.button("🚀 INITIATE WEB-GROUNDED CONCURRENT CRITIC-ACTOR STRATEGY SEQUENCE", use_container_width=True):
         if not team_members_list: strl.error("❌ Array Empty: Cannot execute with no tracked personnel.")
         else:
-            with strl.spinner("Parallel sub-agents tracking data vectors concurrently... Critic self-correcting via Google Search live PKR thresholds..."):
+            with strl.spinner("Parallel sub-agents tracking data vectors concurrently..."):
                 try:
                     agent_res = requests.post(f"{API_BASE_URL}/agent/sprint", json={
                         "team_id": strl.session_state.team_id, "current_inventory": inventory_pool,
@@ -422,10 +433,8 @@ def run_agentic_planner_scope():
         if "=== PROCUREMENT PROFILE ===" in raw_output:
             parts = raw_output.split("=== PROCUREMENT PROFILE ===")
             main_content = parts[1]
-            if "=== DEVELOPER SPRINT BLOCKS ===" in main_content:
-                inventory_block, dev_block = main_content.split("=== DEVELOPER SPRINT BLOCKS ===")
+            if "=== DEVELOPER SPRINT BLOCKS ===" in main_content: inventory_block, dev_block = main_content.split("=== DEVELOPER SPRINT BLOCKS ===")
             else: inventory_block = main_content; dev_block = ""
-            
             strl.warning("🛍️ Web-Verified Supply Logistics: Shortage Market Ingestion Pricing")
             strl.markdown(inventory_block.strip())
             if dev_block:
@@ -436,17 +445,14 @@ def run_agentic_planner_scope():
 # ==========================================
 # CENTRAL ROUTER MANAGEMENT MATRIX
 # ==========================================
-if not strl.session_state.authenticated:
-    render_authentication_gate()
+if not strl.session_state.authenticated: render_authentication_gate()
 else:
     strl.sidebar.markdown(f"### 🪐 ACTIVE HUD NODE")
     app_mode = strl.sidebar.selectbox("CHOOSE SYSTEM DOMAIN ROUTE", ["📋 Client Module Dashboard", "🔒 Secure Admin Portal", "🧠 Agentic Sprint Planner"])
     strl.sidebar.markdown("---")
-    
     if strl.sidebar.button("🚨 TERMINATE ACTIVE COMMAND DISPATCH NODE", use_container_width=True):
         strl.session_state.logout_sequence = True
         strl.rerun()
-        
     if app_mode == "📋 Client Module Dashboard": run_client_dashboard_scope()
     elif app_mode == "🔒 Secure Admin Portal": run_admin_portal_scope()
     elif app_mode == "🧠 Agentic Sprint Planner": run_agentic_planner_scope()
