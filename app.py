@@ -14,7 +14,7 @@ for key, default_val in [
     ("authenticated", False), ("team_id", None), 
     ("team_admin_token", ""), ("cached_plan", ""), 
     ("rows", 4), ("inv_rows", 3), ("member_count", 3),
-    ("logout_sequence", False)
+    ("logout_sequence", False), ("sync_required", False)
 ]:
     if key not in strl.session_state:
         strl.session_state[key] = default_val
@@ -147,7 +147,7 @@ def open_public_community_dialog():
         scrapped_text = strl.text_area("Describe your available scrap component or hardware problem parameters:", key="write_scrapped_val")
         target_mcu = strl.text_input("Target Microcontroller Core System", value="Arduino Uno / ESP32", key="write_mcu_val")
         
-        strl.markdown("🔒 *Enter your signature token to manage or delete this post later anonymously.*")
+        strl.markdown("🔒 *Enter a unique signature code to manage or delete this post later anonymously.*")
         author_sig = strl.text_input("Enter Secret Author Signature Name (Will not be displayed publicly)", type="password", key="write_sig_val")
         
         if strl.button("🛰️ BROADCAST TO COMMUNITY LEDGER", use_container_width=True):
@@ -160,7 +160,9 @@ def open_public_community_dialog():
                             "scrapped_component_text": scrapped_text, "target_mcu": target_mcu, "author_signature": author_sig
                         })
                         if res.status_code == 200:
-                            strl.success(f"🎉 Solution successfully ledgered into the cluster! Assigned ID: {res.json()['comment_id']}")
+                            strl.success(f"🎉 Solution successfully ledgered! ID: {res.json()['comment_id']}")
+                            # Set global sync latch true before breaking scope matrix
+                            strl.session_state.sync_required = True
                             time.sleep(1.2)
                             strl.rerun()
                     except Exception as e: strl.error(f"💥 Ground Link Down: {str(e)}")
@@ -179,7 +181,8 @@ def open_public_community_dialog():
                             "comment_id": target_comm_id, "author_signature": confirm_sig
                         })
                         if del_res.status_code == 200:
-                            strl.success("🚨 Handshake Verified. Post successfully wiped from cloud registers!")
+                            strl.success("🚨 Handshake Verified. Post wiped successfully!")
+                            strl.session_state.sync_required = True
                             time.sleep(1.2)
                             strl.rerun()
                         else: strl.error("🛑 Deletion Rejected: Invalid signature or Document ID mismatch.")
@@ -255,12 +258,11 @@ def render_authentication_gate():
                 except Exception as e: strl.error("💥 Network Anomaly.")
     strl.markdown("</div>", unsafe_allow_html=True)
     
-    # 🌍 Sleek, unified open-access community buttons
     strl.markdown("<h4 style='text-align: center; margin-top: 2rem;'>💡 PUBLIC COMMUNITY DEPLOYMENTS</h4>", unsafe_allow_html=True)
     if strl.button("🌍 ACCESS GLOBAL COMMUNITY TERMINAL INTERFACE", use_container_width=True):
         open_public_community_dialog()
         
-    # 🏁 LIVE CROWDSOURCED COMMUNITY WORKSPACE FEED
+    # 🏁 LIVE WORKSPACE FEED DISPLAY
     strl.markdown("### 📡 Active Community Intelligence Ledger Feed")
     try:
         feed_res = requests.get(f"{API_BASE_URL}/public/community/all")
@@ -433,7 +435,8 @@ def run_agentic_planner_scope():
         if "=== PROCUREMENT PROFILE ===" in raw_output:
             parts = raw_output.split("=== PROCUREMENT PROFILE ===")
             main_content = parts[1]
-            if "=== DEVELOPER SPRINT BLOCKS ===" in main_content: inventory_block, dev_block = main_content.split("=== DEVELOPER SPRINT BLOCKS ===")
+            if "=== DEVELOPER SPRINT BLOCKS ===" in main_content:
+                inventory_block, dev_block = main_content.split("=== DEVELOPER SPRINT BLOCKS ===")
             else: inventory_block = main_content; dev_block = ""
             strl.warning("🛍️ Web-Verified Supply Logistics: Shortage Market Ingestion Pricing")
             strl.markdown(inventory_block.strip())
@@ -443,8 +446,13 @@ def run_agentic_planner_scope():
         else: strl.markdown(raw_output)
 
 # ==========================================
-# CENTRAL ROUTER MANAGEMENT MATRIX
+# CENTRAL CORE EXECUTIVE DESK CONTROL ROUTER
 # ==========================================
+# Intercept child dialog state synchronization flags before running layout draws
+if strl.session_state.sync_required:
+    strl.session_state.sync_required = False
+    strl.rerun()
+
 if not strl.session_state.authenticated: render_authentication_gate()
 else:
     strl.sidebar.markdown(f"### 🪐 ACTIVE HUD NODE")
