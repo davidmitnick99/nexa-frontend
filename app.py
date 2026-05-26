@@ -14,7 +14,9 @@ for key, default_val in [
     ("authenticated", False), ("team_id", None), 
     ("team_admin_token", ""), ("cached_plan", ""), 
     ("rows", 4), ("inv_rows", 3), ("member_count", 3),
-    ("logout_sequence", False), ("sync_required", False)
+    ("logout_sequence", False),
+    ("trigger_community_broadcast", False),
+    ("com_scrapped_text", ""), ("com_target_mcu", ""), ("com_author_sig", "")
 ]:
     if key not in strl.session_state:
         strl.session_state[key] = default_val
@@ -140,53 +142,42 @@ if strl.session_state.logout_sequence:
 @strl.dialog("🌍 GLOBAL COMMUNITY SOLUTIONS MATRIX")
 def open_public_community_dialog():
     strl.markdown("<div class='robot-iris-portal'><div class='robot-iris-core'></div></div>", unsafe_allow_html=True)
-    
     tab_write, tab_delete = strl.tabs(["✏️ Broadcast Solution Profile", "🗑️ Revoke Entry Document"])
     
     with tab_write:
-        scrapped_text = strl.text_area("Describe your available scrap component or hardware problem parameters:", key="write_scrapped_val")
-        target_mcu = strl.text_input("Target Microcontroller Core System", value="Arduino Uno / ESP32", key="write_mcu_val")
+        scrapped_text = strl.text_area("Describe your available scrap component or hardware problem parameters:", key="modal_txt_field")
+        target_mcu = strl.text_input("Target Microcontroller Core System", value="Arduino Uno / ESP32", key="modal_mcu_field")
+        strl.markdown("🔒 *Enter your signature token to manage or delete this post later anonymously.*")
+        author_sig = strl.text_input("Enter Secret Author Signature Name", type="password", key="modal_sig_field")
         
-        strl.markdown("🔒 *Enter a unique signature code to manage or delete this post later anonymously.*")
-        author_sig = strl.text_input("Enter Secret Author Signature Name (Will not be displayed publicly)", type="password", key="write_sig_val")
-        
+        # Capture input states and pass the control flag straight out to the main page thread
         if strl.button("🛰️ BROADCAST TO COMMUNITY LEDGER", use_container_width=True):
             if not scrapped_text.strip() or not author_sig.strip():
                 strl.error("❌ Problem logs and Signature keys are required parameters.")
             else:
-                with strl.spinner("Invoking web-grounded community sub-agents..."):
-                    try:
-                        res = requests.post(f"{API_BASE_URL}/public/community/resolve", json={
-                            "scrapped_component_text": scrapped_text, "target_mcu": target_mcu, "author_signature": author_sig
-                        })
-                        if res.status_code == 200:
-                            strl.success(f"🎉 Solution successfully ledgered! ID: {res.json()['comment_id']}")
-                            # Set global sync latch true before breaking scope matrix
-                            strl.session_state.sync_required = True
-                            time.sleep(1.2)
-                            strl.rerun()
-                    except Exception as e: strl.error(f"💥 Ground Link Down: {str(e)}")
+                strl.session_state.com_scrapped_text = scrapped_text
+                strl.session_state.com_target_mcu = target_mcu
+                strl.session_state.com_author_sig = author_sig
+                strl.session_state.trigger_community_broadcast = True
+                strl.rerun()
 
     with tab_delete:
-        target_comm_id = strl.text_input("Enter Target Component Document ID to Delete", key="del_id_val")
-        confirm_sig = strl.text_input("Confirm Secret Author Signature Name to Verify Ownership", type="password", key="del_sig_val")
+        target_comm_id = strl.text_input("Enter Target Component Document ID to Delete")
+        confirm_sig = strl.text_input("Confirm Secret Author Signature Name to Verify Ownership", type="password")
         
         if strl.button("🚨 PERMANENTLY PURGE DOCUMENT RECORD", use_container_width=True):
-            if not target_comm_id.strip() or not confirm_sig.strip():
-                strl.error("❌ Both verification anchors are required to execute a wipe sequence.")
-            else:
-                with strl.spinner("Verifying cryptographic token alignment signatures..."):
+            if target_comm_id.strip() and confirm_sig.strip():
+                with strl.spinner("Purging record..."):
                     try:
                         del_res = requests.post(f"{API_BASE_URL}/public/community/delete", json={
                             "comment_id": target_comm_id, "author_signature": confirm_sig
                         })
                         if del_res.status_code == 200:
-                            strl.success("🚨 Handshake Verified. Post wiped successfully!")
-                            strl.session_state.sync_required = True
-                            time.sleep(1.2)
+                            strl.success("🚨 Post wiped successfully!")
+                            time.sleep(1)
                             strl.rerun()
-                        else: strl.error("🛑 Deletion Rejected: Invalid signature or Document ID mismatch.")
-                    except Exception as e: strl.error(f"💥 Link Down: {str(e)}")
+                        else: strl.error("🛑 Deletion Rejected: Key mismatch.")
+                    except Exception as e: strl.error(f"💥 Error: {str(e)}")
 
 # ==========================================
 # 📟 RUN-TIME DIAGNOSTICS DIALOG BOX MODAL
@@ -194,16 +185,12 @@ def open_public_community_dialog():
 @strl.dialog("📟 RUN-TIME HARDWARE HEALTH DIAGNOSTIC CORE")
 def open_hardware_diagnostics_dialog():
     strl.markdown("<div class='robot-iris-portal'><div class='robot-iris-core'></div></div>", unsafe_allow_html=True)
-    strl.caption("Paste system log streams or state profiles directly to parse technical circuit failure registers.")
-    strl.markdown("---")
-    
     target_mod = strl.selectbox("Select Target Blueprint Environment", ["Sumo Robot", "RC Car", "Robo Soccer"])
-    symptom = strl.text_input("Describe Physical Fault Symptom:", placeholder="e.g., Core chip heating up and tracks lagging left...")
+    symptom = strl.text_input("Describe Physical Fault Symptom:")
     raw_logs = strl.text_area("Paste Raw Serial Monitor Hex Arrays / Compiler Crash Stack Traces", height=100)
     
     if strl.button("⚡ EXECUTE REAL-TIME RADAR INTERCEPT", use_container_width=True):
-        if not symptom.strip(): strl.error("❌ Symptom markers require string inputs.")
-        else:
+        if symptom.strip():
             with strl.spinner("Isolating telemetry vectors against RAG grounding registers..."):
                 try:
                     res = requests.post(f"{API_BASE_URL}/agent/diagnose", json={
@@ -219,6 +206,31 @@ def open_hardware_diagnostics_dialog():
 # AUTHENTICATION GATE SCREEN
 # ==========================================
 def render_authentication_gate():
+    # ⚡ EXECUTING DECOUPLED BACKEND BROADCST SAFELY ON MAIN RENDERING PAGE
+    if strl.session_state.trigger_community_broadcast:
+        strl.markdown("<div class='cyber-card'>", unsafe_allow_html=True)
+        strl.markdown("<div class='robot-iris-portal'><div class='robot-iris-core'></div></div>", unsafe_allow_html=True)
+        with strl.spinner("🛰️ CONNECTED: Processing Web-Searching Multi-Agent Compilation Pipeline..."):
+            try:
+                res = requests.post(f"{API_BASE_URL}/public/community/resolve", json={
+                    "scrapped_component_text": strl.session_state.com_scrapped_text,
+                    "target_mcu": strl.session_state.com_target_mcu,
+                    "author_signature": strl.session_state.com_author_sig
+                })
+                if res.status_code == 200:
+                    strl.success(f"🎉 SECURE MEMORY SYNCED: Solution added under ID: {res.json()['comment_id']}")
+                    # Clear transient state registers completely
+                    strl.session_state.trigger_community_broadcast = False
+                    strl.session_state.com_scrapped_text = ""
+                    strl.session_state.com_target_mcu = ""
+                    strl.session_state.com_author_sig = ""
+                    time.sleep(1.5)
+                    strl.rerun()
+            except Exception as e:
+                strl.error(f"💥 Transmission Interrupted: {str(e)}")
+                strl.session_state.trigger_community_broadcast = False
+        strl.markdown("</div>", unsafe_allow_html=True)
+
     strl.markdown("<div class='robot-iris-portal'><div class='robot-iris-core'></div></div>", unsafe_allow_html=True)
     strl.markdown("<h1 style='text-align: center;'>NEXA COMMAND ACCESS TUNNEL</h1>", unsafe_allow_html=True)
     
@@ -262,7 +274,7 @@ def render_authentication_gate():
     if strl.button("🌍 ACCESS GLOBAL COMMUNITY TERMINAL INTERFACE", use_container_width=True):
         open_public_community_dialog()
         
-    # 🏁 LIVE WORKSPACE FEED DISPLAY
+    # 📡 LIVE CROWDSOURCED DISPATCH LEDGER FEED
     strl.markdown("### 📡 Active Community Intelligence Ledger Feed")
     try:
         feed_res = requests.get(f"{API_BASE_URL}/public/community/all")
@@ -446,14 +458,12 @@ def run_agentic_planner_scope():
         else: strl.markdown(raw_output)
 
 # ==========================================
-# CENTRAL CORE EXECUTIVE DESK CONTROL ROUTER
+# CENTRAL ROUTER MANAGEMENT MATRIX
 # ==========================================
-# Intercept child dialog state synchronization flags before running layout draws
-if strl.session_state.sync_required:
-    strl.session_state.sync_required = False
-    strl.rerun()
-
-if not strl.session_state.authenticated: render_authentication_gate()
+if not strl.session_state.authenticated and not strl.session_state.trigger_community_broadcast:
+    render_authentication_gate()
+elif strl.session_state.trigger_community_broadcast:
+    render_authentication_gate()
 else:
     strl.sidebar.markdown(f"### 🪐 ACTIVE HUD NODE")
     app_mode = strl.sidebar.selectbox("CHOOSE SYSTEM DOMAIN ROUTE", ["📋 Client Module Dashboard", "🔒 Secure Admin Portal", "🧠 Agentic Sprint Planner"])
