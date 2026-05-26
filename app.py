@@ -28,105 +28,52 @@ strl.markdown("""
         background: radial-gradient(circle at center, #060b16 0%, #020408 100%) !important;
         background-image: linear-gradient(rgba(18, 30, 49, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(18, 30, 49, 0.1) 1px, transparent 1px) !important;
         background-size: 30px 30px !important;
-        color: #00f0ff !important;
-        font-family: 'Share Tech Mono', monospace !important;
+        color: #00f0ff !important; font-family: 'Share Tech Mono', monospace !important;
         animation: gridScroll 20s linear infinite;
     }
-    
     @keyframes gridScroll { from { background-position: 0 0; } to { background-position: 0 600px; } }
 
     h1, h2, h3, h4 { 
-        font-family: 'Orbitron', sans-serif !important; 
-        color: #00f0ff !important; 
-        text-shadow: 0 0 10px rgba(0, 240, 255, 0.6) !important;
-        font-weight: 700 !important; letter-spacing: 2px !important;
+        font-family: 'Orbitron', sans-serif !important; color: #00f0ff !important; 
+        text-shadow: 0 0 10px rgba(0, 240, 255, 0.6) !important; font-weight: 700 !important; letter-spacing: 2px !important;
     }
-    
-    section[data-testid="stSidebar"] { 
-        background-color: rgba(6, 11, 22, 0.85) !important; 
-        border-right: 2px solid #00f0ff !important;
-        box-shadow: 5px 0 25px rgba(0, 240, 255, 0.15);
-    }
+    section[data-testid="stSidebar"] { background-color: rgba(6, 11, 22, 0.85) !important; border-right: 2px solid #00f0ff !important; }
     
     .stButton>button { 
         background: linear-gradient(135deg, #005f73 0%, #0a9396 100%) !important; 
         color: #ffffff !important; font-family: 'Orbitron', sans-serif !important;
-        font-weight: bold !important; border-radius: 4px !important;
-        border: 1px solid #00f0ff !important; padding: 0.6rem 2rem !important;
-        text-shadow: 0 0 5px #00f0ff; box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
-        transition: all 0.3s ease-in-out;
+        border: 1px solid #00f0ff !important; padding: 0.6rem 2rem !important; box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
     }
-    .stButton>button:hover { transform: scale(1.02); box-shadow: 0 0 25px #00f0ff; background: #00f0ff !important; color: #060b16 !important; }
-    
     div.cyber-card {
-        background: rgba(10, 15, 29, 0.75) !important; 
-        border: 1px solid #00f0ff !important; border-radius: 6px; padding: 2rem; margin-bottom: 1.5rem;
-        box-shadow: 0 0 20px rgba(0, 240, 255, 0.1); backdrop-filter: blur(10px);
+        background: rgba(10, 15, 29, 0.75) !important; border: 1px solid #00f0ff !important; border-radius: 6px; padding: 2rem; margin-bottom: 1.5rem;
     }
-
     .robot-iris-portal {
         display: flex; justify-content: center; align-items: center; margin: 1.5rem auto;
-        width: 100px; height: 100px; border-radius: 50%; border: 3px dashed #00f0ff;
-        box-shadow: 0 0 20px rgba(0, 240, 255, 0.4), inset 0 0 15px rgba(0, 240, 255, 0.4);
-        animation: spinControl 8s linear infinite;
+        width: 100px; height: 100px; border-radius: 50%; border: 3px dashed #00f0ff; animation: spinControl 8s linear infinite;
     }
-    .robot-iris-core {
-        width: 35px; height: 35px; border-radius: 50%; background: #00f0ff;
-        box-shadow: 0 0 20px #00f0ff; animation: pulseCore 1s ease-in-out infinite alternate;
-    }
+    .robot-iris-core { width: 35px; height: 35px; border-radius: 50%; background: #00f0ff; box-shadow: 0 0 20px #00f0ff; }
+    @keyframes spinControl { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-    .soccer-blueprint-arena {
-        position: relative; width: 150px; height: 150px; margin: 1.5rem auto;
-        border: 2px solid rgba(0, 240, 255, 0.3); border-radius: 50%;
-        background: radial-gradient(circle, rgba(10,93,150,0.1) 0%, transparent 70%);
-    }
-    .soccer-radar-line {
-        position: absolute; width: 50%; height: 2px; background: linear-gradient(90deg, #00f0ff, transparent);
-        top: 50%; left: 50%; transform-origin: left center; animation: radarSweep 2.5s linear infinite;
-    }
-    .soccer-omni-wheel {
-        position: absolute; width: 22px; height: 12px; background: #00f0ff; border-radius: 3px; box-shadow: 0 0 12px #00f0ff;
-    }
+    .soccer-blueprint-arena { position: relative; width: 150px; height: 150px; margin: 1.5rem auto; border: 2px solid rgba(0, 240, 255, 0.3); border-radius: 50%; }
+    .soccer-radar-line { position: absolute; width: 50%; height: 2px; background: linear-gradient(90deg, #00f0ff, transparent); top: 50%; left: 50%; transform-origin: left center; animation: radarSweep 2.5s linear infinite; }
+    .soccer-omni-wheel { position: absolute; width: 22px; height: 12px; background: #00f0ff; border-radius: 3px; }
     .sw-1 { top: 5px; left: 64px; transform: rotate(0deg); }
     .sw-2 { bottom: 15px; left: 15px; transform: rotate(120deg); }
     .sw-3 { bottom: 15px; right: 15px; transform: rotate(240deg); }
 
-    .sumo-combat-telemetry {
-        position: relative; width: 140px; height: 90px; margin: 2rem auto; border: 2px solid #ff0055; border-radius: 4px;
-        background: linear-gradient(0deg, rgba(255,0,85,0.05) 0%, transparent 100%); box-shadow: 0 0 20px rgba(255,0,85,0.2);
-    }
-    .sumo-attack-wedge {
-        position: absolute; bottom: 0; left: 20px; width: 100px; height: 0;
-        border-bottom: 30px solid #ff0055; border-left: 15px solid transparent; border-right: 15px solid transparent;
-        filter: drop-shadow(0 0 10px #ff0055); animation: wedgeOscillate 0.6s ease-in-out infinite alternate;
-    }
-    .sumo-laser-line {
-        position: absolute; width: 100%; height: 2px; background-color: #ff0055; box-shadow: 0 0 10px #ff0055; top: 20px; animation: laserScan 1.5s ease-in-out infinite alternate;
-    }
+    .sumo-combat-telemetry { position: relative; width: 140px; height: 90px; margin: 2rem auto; border: 2px solid #ff0055; border-radius: 4px; }
+    .sumo-attack-wedge { position: absolute; bottom: 0; left: 20px; width: 100px; height: 0; border-bottom: 30px solid #ff0055; border-left: 15px solid transparent; border-right: 15px solid transparent; animation: wedgeOscillate 0.6s ease-in-out infinite alternate; }
+    .sumo-laser-line { position: absolute; width: 100%; height: 2px; background-color: #ff0055; top: 20px; animation: laserScan 1.5s ease-in-out infinite alternate; }
 
-    @keyframes spinControl { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    @keyframes pulseCore { from { transform: scale(0.85); filter: brightness(1); } to { transform: scale(1.1); filter: brightness(1.5); } }
     @keyframes radarSweep { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     @keyframes wedgeOscillate { from { transform: translateY(0); } to { transform: translateY(-8px); } }
     @keyframes laserScan { from { top: 10px; } to { top: 80px; } }
-
-    .disconnect-banner {
-        background-color: #1a020c !important; border: 2px solid #ff0055 !important; color: #ff0055 !important;
-        font-family: 'Share Tech Mono', monospace; padding: 2.5rem; border-radius: 4px; text-align: center; box-shadow: 0 0 40px rgba(255,0,85,0.3);
-    }
-    
-    div[data-testid="stDialog"] div[role="dialog"] {
-        background-color: #050912 !important; border: 2px solid #00f0ff !important; box-shadow: 0 0 30px #00f0ff;
-    }
+    div[data-testid="stDialog"] div[role="dialog"] { background-color: #050912 !important; border: 2px solid #00f0ff !important; }
 </style>
 """, unsafe_allow_html=True)
 
 # Session Termination Handle
 if strl.session_state.logout_sequence:
-    strl.markdown("<div class='disconnect-banner'>", unsafe_allow_html=True)
-    strl.markdown("### ⚠️ [SECURITY] DISCONNECTING NEXA COMMAND CORE HIVE...")
-    strl.markdown("</div>", unsafe_allow_html=True)
-    time.sleep(1.5)
     strl.session_state.authenticated = False
     strl.session_state.team_id = None
     strl.session_state.team_admin_token = ""
@@ -135,7 +82,7 @@ if strl.session_state.logout_sequence:
     strl.rerun()
 
 # ==========================================
-# 🌍 PUBLIC OPEN PORTAL DIALOG BOX MODAL
+# 🌍 PUBLIC COMMUNITY MODAL DIALOG
 # ==========================================
 @strl.dialog("🌍 GLOBAL COMMUNITY SOLUTIONS MATRIX")
 def open_public_community_dialog():
@@ -143,59 +90,57 @@ def open_public_community_dialog():
     tab_write, tab_delete = strl.tabs(["✏️ Broadcast Solution Profile", "🗑️ Revoke Entry Document"])
     
     with tab_write:
-        scrapped_text = strl.text_area("Describe your available scrap component or hardware problem parameters:", key="input_prob_txt")
-        target_mcu = strl.text_input("Target Microcontroller Core System", value="Arduino Uno / ESP32", key="input_mcu_txt")
-        strl.markdown("🔒 *Enter your signature token to manage or delete this post later anonymously.*")
-        author_sig = strl.text_input("Enter Secret Author Signature Name (Stored anonymously as sha256)", type="password", key="input_sig_txt")
-        
-        if strl.button("🛰️ BROADCAST TO COMMUNITY LEDGER", use_container_width=True, key="submit_broadcast_btn"):
-            if not scrapped_text.strip() or not author_sig.strip():
-                strl.error("❌ Problem logs and Signature keys are required parameters.")
-            else:
-                with strl.spinner("Invoking web-grounded community sub-agents..."):
-                    try:
-                        res = requests.post(f"{API_BASE_URL}/public/community/resolve", json={
-                            "scrapped_component_text": scrapped_text, "target_mcu": target_mcu, "author_signature": author_sig
-                        })
-                        if res.status_code == 200:
-                            strl.success(f"🎉 SECURE MEMORY SYNCED: Assigned ID: {res.json()['comment_id']}")
-                            time.sleep(1.5)
-                            # 🔥 CRITICAL UPGRADE: Force a full script compilation at the APP layer scope
-                            strl.rerun(scope="app")
-                    except Exception as e: strl.error(f"💥 Ground Link Down: {str(e)}")
+        with strl.form("community_input_form", clear_on_submit=True):
+            scrapped_text = strl.text_area("Describe your available scrap component or hardware problem parameters:")
+            target_mcu = strl.text_input("Target Microcontroller Core System", value="Arduino Uno / ESP32")
+            author_sig = strl.text_input("Enter Secret Author Signature Name", type="password")
+            submit_btn = strl.form_submit_button("🛰️ BROADCAST TO COMMUNITY LEDGER", use_container_width=True)
+            
+            if submit_btn:
+                if scrapped_text.strip() and author_sig.strip():
+                    with strl.spinner("Invoking web-grounded community sub-agents..."):
+                        try:
+                            res = requests.post(f"{API_BASE_URL}/public/community/resolve", json={
+                                "scrapped_component_text": scrapped_text, "target_mcu": target_mcu, "author_signature": author_sig
+                            })
+                            if res.status_code == 200:
+                                strl.success("🎉 SECURE MEMORY SYNCED!")
+                                time.sleep(1.2)
+                                strl.rerun(scope="app")
+                        except Exception as e: strl.error(f"💥 Ground Link Error: {str(e)}")
 
     with tab_delete:
-        target_comm_id = strl.text_input("Enter Target Component Document ID to Delete", key="input_del_id")
-        confirm_sig = strl.text_input("Confirm Secret Author Signature Name to Verify Ownership", type="password", key="input_del_sig")
-        
-        if strl.button("🚨 PERMANENTLY PURGE DOCUMENT RECORD", use_container_width=True, key="submit_purge_btn"):
-            if target_comm_id.strip() and confirm_sig.strip():
-                with strl.spinner("Verifying signatures and purging record..."):
-                    try:
-                        del_res = requests.post(f"{API_BASE_URL}/public/community/delete", json={
-                            "comment_id": target_comm_id, "author_signature": confirm_sig
-                        })
-                        if del_res.status_code == 200:
-                            strl.success("🚨 Post wiped successfully from cloud registers!")
-                            time.sleep(1.5)
-                            # 🔥 CRITICAL UPGRADE: Force a full script compilation at the APP layer scope
-                            strl.rerun(scope="app")
-                        else: strl.error("🛑 Deletion Rejected: Key mismatch.")
-                    except Exception as e: strl.error(f"💥 Error: {str(e)}")
+        with strl.form("community_delete_form", clear_on_submit=True):
+            target_comm_id = strl.text_input("Enter Target Component Document ID to Delete")
+            confirm_sig = strl.text_input("Confirm Secret Author Signature Name", type="password")
+            delete_btn = strl.form_submit_button("🚨 PERMANENTLY PURGE DOCUMENT RECORD", use_container_width=True)
+            
+            if delete_btn:
+                if target_comm_id.strip() and confirm_sig.strip():
+                    with strl.spinner("Verifying signatures..."):
+                        try:
+                            del_res = requests.post(f"{API_BASE_URL}/public/community/delete", json={
+                                "comment_id": target_comm_id, "author_signature": confirm_sig
+                            })
+                            if del_res.status_code == 200:
+                                strl.success("🚨 Post wiped successfully!")
+                                time.sleep(1.2)
+                                strl.rerun(scope="app")
+                        except Exception as e: strl.error(f"💥 Error: {str(e)}")
 
 # ==========================================
-# 📟 RUN-TIME DIAGNOSTICS DIALOG BOX MODAL
+# 📟 RUN-TIME DIAGNOSTICS MODAL DIALOG
 # ==========================================
 @strl.dialog("📟 RUN-TIME HARDWARE HEALTH DIAGNOSTIC CORE")
 def open_hardware_diagnostics_dialog():
     strl.markdown("<div class='robot-iris-portal'><div class='robot-iris-core'></div></div>", unsafe_allow_html=True)
     target_mod = strl.selectbox("Select Target Blueprint Environment", ["Sumo Robot", "RC Car", "Robo Soccer"])
     symptom = strl.text_input("Describe Physical Fault Symptom:")
-    raw_logs = strl.text_area("Paste Raw Serial Monitor Hex Arrays / Compiler Crash Stack Traces", height=100)
+    raw_logs = strl.text_area("Paste Raw Serial Monitor Logs", height=100)
     
     if strl.button("⚡ EXECUTE REAL-TIME RADAR INTERCEPT", use_container_width=True):
         if symptom.strip():
-            with strl.spinner("Isolating telemetry vectors against RAG grounding registers..."):
+            with strl.spinner("Isolating telemetry vectors against RAG registers..."):
                 try:
                     res = requests.post(f"{API_BASE_URL}/agent/diagnose", json={
                         "team_id": strl.session_state.team_id, "module_name": target_mod,
@@ -207,7 +152,7 @@ def open_hardware_diagnostics_dialog():
                 except Exception as e: strl.error(f"💥 Link Down: {str(e)}")
 
 # ==========================================
-# AUTHENTICATION GATE SCREEN
+# CENTRAL AUTHENTICATION PRESENTATION SCREEN
 # ==========================================
 def render_authentication_gate():
     strl.markdown("<div class='robot-iris-portal'><div class='robot-iris-core'></div></div>", unsafe_allow_html=True)
@@ -253,20 +198,31 @@ def render_authentication_gate():
     if strl.button("🌍 ACCESS GLOBAL COMMUNITY TERMINAL INTERFACE", use_container_width=True):
         open_public_community_dialog()
         
-    # 📡 LIVE CROWDSOURCED DISPATCH LEDGER FEED
+    # 📡 DEFINITIVE RAW LIST PARSING INTERCEPT FEED
     strl.markdown("### 📡 Active Community Intelligence Ledger Feed")
     try:
         feed_res = requests.get(f"{API_BASE_URL}/public/community/all")
         if feed_res.status_code == 200:
-            posts = feed_res.json().get("posts", [])
-            if not posts:
-                strl.info("ℹ️ Community ledger is currently empty. Be the first to broadcast a mechatronics issue mapping above!")
-            for post in posts:
-                with strl.expander(f"📦 MODULE ISSUE ID: {post['comment_id']} | Target MCU: {post['target_mcu']} ({post['timestamp']})"):
-                    strl.markdown(f"**Student Hardware Scenario Description:**\n`{post['scrapped_component_text']}`")
-                    strl.markdown("---")
-                    strl.markdown(f"**Nexa Agentic Mentorship Output Solutions:**\n{post['mentor_guidance']}")
-    except Exception as f_err: strl.error(f"Feed error: {str(f_err)}")
+            posts = feed_res.json() # Reads the straight clean list [] array directly from the endpoint
+            if not isinstance(posts, list) or len(posts) == 0:
+                strl.info("ℹ️ Community ledger is empty. Submit a hardware scenario profile above!")
+            else:
+                for post in posts:
+                    try:
+                        # Extract metrics safely with explicit dictionary fallback checks
+                        c_id = post.get("comment_id", "UNKNOWN_ID")
+                        mcu_val = post.get("target_mcu", "GENERIC_MCU")
+                        t_stamp = post.get("timestamp", "RECENT")
+                        prob_desc = post.get("scrapped_component_text", "No problem trace log data listed.")
+                        ai_sol = post.get("mentor_guidance", "Processing solution profile...")
+                        
+                        with strl.expander(f"📦 MODULE ISSUE ID: {c_id} | Target MCU: {mcu_val} ({t_stamp})"):
+                            strl.markdown(f"**Student Hardware Scenario Description:**\n`{prob_desc}`")
+                            strl.markdown("---")
+                            strl.markdown(f"**Nexa Agentic Mentorship Output Solutions:**\n{ai_sol}")
+                    except Exception as item_err:
+                        print(f"Skipping single malformed document line context: {str(item_err)}")
+    except Exception as f_err: strl.error(f"Feed sync anomaly: {str(f_err)}")
 
 # ==========================================
 # MODULE VIEWPORT AUTHENTICATED DOMAINS
