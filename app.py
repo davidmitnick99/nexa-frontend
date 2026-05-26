@@ -19,10 +19,9 @@ for key, default_val in [
     if key not in strl.session_state:
         strl.session_state[key] = default_val
 
-# 🌌🎨 HIGH-INNOVATION ROBOTICS MISSION CONTROL HUD DESIGN MATRIX
+# 🌌🎨 ROBOTICS MISSION CONTROL HUD DESIGN MATRIX
 strl.markdown("""
 <style>
-    /* import futuristic sci-fi typography */
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap');
 
     /* 🌌 Dynamic Animated Matrix Space Grid Background */
@@ -40,7 +39,6 @@ strl.markdown("""
         to { background-position: 0 600px; }
     }
 
-    /* Sci-Fi Typography Override */
     h1, h2, h3, h4 { 
         font-family: 'Orbitron', sans-serif !important; 
         color: #00f0ff !important; 
@@ -49,14 +47,12 @@ strl.markdown("""
         letter-spacing: 2px !important;
     }
     
-    /* Glowing Neon Sidebar */
     section[data-testid="stSidebar"] { 
         background-color: rgba(6, 11, 22, 0.85) !important; 
         border-right: 2px solid #00f0ff !important;
         box-shadow: 5px 0 25px rgba(0, 240, 255, 0.15);
     }
     
-    /* Tactical Action Buttons */
     .stButton>button { 
         background: linear-gradient(135deg, #005f73 0%, #0a9396 100%) !important; 
         color: #ffffff !important; font-family: 'Orbitron', sans-serif !important;
@@ -68,7 +64,6 @@ strl.markdown("""
     }
     .stButton>button:hover { transform: scale(1.02); box-shadow: 0 0 25px #00f0ff; background: #00f0ff !important; color: #060b16 !important; }
     
-    /* Glassmorphism Tactical Containers */
     div.cyber-card {
         background: rgba(10, 15, 29, 0.75) !important; 
         border: 1px solid #00f0ff !important;
@@ -77,7 +72,7 @@ strl.markdown("""
         backdrop-filter: blur(10px);
     }
 
-    /* 🤖 AUTOMATED iris GATE */
+    /* 🤖 AUTOMATED MECHANICAL IRIS GATE */
     .robot-iris-portal {
         display: flex; justify-content: center; align-items: center; margin: 2rem auto;
         width: 120px; height: 120px; border-radius: 50%;
@@ -90,7 +85,7 @@ strl.markdown("""
         box-shadow: 0 0 25px #00f0ff; animation: pulseCore 1s ease-in-out infinite alternate;
     }
 
-    /* ⚽ INNOVATIVE ROBOTIC SOCCER CHASSIS RADAR SCREEN */
+    /* ⚽ ROBOTIC SOCCER RADAR SCREEN */
     .soccer-blueprint-arena {
         position: relative; width: 150px; height: 150px; margin: 1.5rem auto;
         border: 2px solid rgba(0, 240, 255, 0.3); border-radius: 50%;
@@ -109,7 +104,7 @@ strl.markdown("""
     .sw-2 { bottom: 15px; left: 15px; transform: rotate(120deg); }
     .sw-3 { bottom: 15px; right: 15px; transform: rotate(240deg); }
 
-    /* 💥 HIGH-INNOVATION SUMO COMBAT TELEMETRY INTERFACE */
+    /* 💥 SUMO COMBAT TELEMETRY INTERFACE */
     .sumo-combat-telemetry {
         position: relative; width: 140px; height: 90px; margin: 2rem auto;
         border: 2px solid #ff0055; border-radius: 4px;
@@ -128,30 +123,22 @@ strl.markdown("""
         animation: laserScan 1.5s ease-in-out infinite alternate;
     }
 
-    /* Core Animation Routines */
     @keyframes spinControl { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     @keyframes pulseCore { from { transform: scale(0.85); filter: brightness(1); } to { transform: scale(1.1); filter: brightness(1.5); } }
     @keyframes radarSweep { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     @keyframes wedgeOscillate { from { transform: translateY(0); } to { transform: translateY(-8px); } }
     @keyframes laserScan { from { top: 10px; } to { top: 80px; } }
 
-    /* 🚨 CYBER DISCONNECT ALARM BANNER */
     .disconnect-banner {
         background-color: #1a020c !important; border: 2px solid #ff0055 !important;
         color: #ff0055 !important; font-family: 'Share Tech Mono', monospace;
         padding: 2.5rem; border-radius: 4px; text-align: center;
         box-shadow: 0 0 40px rgba(255,0,85,0.3);
-        text-shadow: 0 0 5px #ff0055;
     }
-    
-    /* Text formatting tweak */
-    div[data-testid="stMarkdownContainer"] p { font-size: 1.1rem; letter-spacing: 0.5px; }
 </style>
 """, unsafe_allow_html=True)
 
-# ==========================================
-# TERMINATION ENGINE ROUTING LAYER
-# ==========================================
+# Session Termination Handle
 if strl.session_state.logout_sequence:
     strl.markdown("<div class='disconnect-banner'>", unsafe_allow_html=True)
     strl.markdown("### ⚠️ [SECURITY] DISCONNECTING NEXA COMMAND CORE HIVE...")
@@ -167,12 +154,37 @@ if strl.session_state.logout_sequence:
     strl.rerun()
 
 # ==========================================
-# ANIMATED MISSION AUTH PORTAL
+# PUBLIC DEMOCRATIZATION SCOPES (UNAUTHENTICATED)
 # ==========================================
+def render_public_community_hub():
+    strl.markdown("<div class='cyber-card'>", unsafe_allow_html=True)
+    strl.subheader("🌍 Public Open-Source Community Mentor Portal")
+    strl.caption("Democratizing robotics hardware solutions across Pakistani student incubation spaces natively.")
+    strl.markdown("---")
+    
+    col1, col2 = strl.columns(2)
+    with col1: scrapped_text = strl.text_area("Describe your available scrap component or driver layout parameters (e.g., 'Green motor board with 4 pins and a big heat sink salvaged from an old scanner')", height=100)
+    with col2: target_mcu = strl.text_input("Target Microcontroller Core System", value="Arduino Uno / ESP32")
+    
+    if strl.button("🛰️ QUERY COMMUNITY DATA MATRIX", use_container_width=True):
+        if not scrapped_text.strip(): strl.error("❌ Identification script payload context cannot be empty strings.")
+        else:
+            with strl.spinner("Invoking web-grounded community sub-agents to resolve topology registers..."):
+                try:
+                    res = requests.post(f"{API_BASE_URL}/public/community/resolve", json={
+                        "scrapped_component_text": scrapped_text, "target_mcu": target_mcu
+                    })
+                    if res.status_code == 200:
+                        strl.info("🎯 Ingested Open Community Agent Guidance Report Matrix Compiled:")
+                        strl.markdown(res.json()["mentor_guidance"])
+                except Exception as e: strl.error(f"💥 Ground Link Down: {str(e)}")
+    strl.markdown("</div>", unsafe_allow_html=True)
+
 def render_authentication_gate():
     strl.markdown("<div class='robot-iris-portal'><div class='robot-iris-core'></div></div>", unsafe_allow_html=True)
     strl.markdown("<h1 style='text-align: center;'>NEXA COMMAND ACCESS TUNNEL</h1>", unsafe_allow_html=True)
     
+    # Secure Login Desk Row Mapping
     strl.markdown("<div class='cyber-card'>", unsafe_allow_html=True)
     auth_mode = strl.radio("SYSTEM HANDSHAKE SCHEMATIC PROFILE", ["Sign In To Active Workspace", "Provision New Multi-Tenant Instance"])
     
@@ -190,8 +202,7 @@ def render_authentication_gate():
                         strl.session_state.team_id = res.json()["team_id"]
                         strl.session_state.team_admin_token = res.json()["admin_token"]
                         hist = requests.get(f"{API_BASE_URL}/agent/cached/{strl.session_state.team_id}")
-                        if hist.status_code == 200:
-                            strl.session_state.cached_plan = hist.json().get("sprint_plan", "")
+                        if hist.status_code == 200: strl.session_state.cached_plan = hist.json().get("sprint_plan", "")
                         strl.success("🤝 Handshake Established. Mounting Neural UI Arrays...")
                         time.sleep(0.8)
                         strl.rerun()
@@ -209,42 +220,28 @@ def render_authentication_gate():
                     if res.status_code == 200: strl.success("🎉 Node Allocated! Toggle parameter above to Sign In.")
                 except Exception as e: strl.error(f"💥 Network Anomaly: {str(e)}")
     strl.markdown("</div>", unsafe_allow_html=True)
+    
+    # Mount the Public Open Community Node directly onto the Landing Gate
+    render_public_community_hub()
 
 # ==========================================
-# MODULE VIEWPORT MASTER DESK
+# MODULE VIEWPORT AUTHENTICATED DOMAINS
 # ==========================================
 def run_client_dashboard_scope():
     strl.markdown("<h2>📋 TELEMETRY RECEPTOR: TEAM VIEWPORT</h2>", unsafe_allow_html=True)
     target_module = strl.sidebar.selectbox("CHOOSE SYSTEM SUBSYSTEM TARGET", ["Sumo Robot", "RC Car", "Robo Soccer"])
     
-    # 🤖 HIGH-INNOVATION DYNAMIC MISSION ANIMATIONS
     if target_module == "Robo Soccer":
-        strl.markdown("""
-        <div class='soccer-blueprint-arena'>
-            <div class='soccer-radar-line'></div>
-            <div class='soccer-omni-wheel sw-1'></div>
-            <div class='soccer-omni-wheel sw-2'></div>
-            <div class='soccer-omni-wheel sw-3'></div>
-        </div>
-        <p style='text-align:center; color:#00f0ff;'><b>OMNIDIRECTIONAL ROBOT CHASSIS KINEMATICS ACTIVE</b></p>
-        """, unsafe_allow_html=True)
+        strl.markdown("<div class='soccer-blueprint-arena'><div class='soccer-radar-line'></div><div class='soccer-omni-wheel sw-1'></div><div class='soccer-omni-wheel sw-2'></div><div class='soccer-omni-wheel sw-3'></div></div><p style='text-align:center; color:#00f0ff;'><b>OMNIDIRECTIONAL KINEMATICS ACTIVE</b></p>", unsafe_allow_html=True)
     elif target_module == "Sumo Robot":
-        strl.markdown("""
-        <div class='sumo-combat-telemetry'>
-            <div class='sumo-laser-line'></div>
-            <div class='sumo-attack-wedge'></div>
-        </div>
-        <p style='text-align:center; color:#ff0055;'><b>HIGH-TORQUE COMBAT ATTACK VECTOR ONLINE</b></p>
-        """, unsafe_allow_html=True)
-    else:
-        strl.markdown("<div class='robot-iris-portal'><div class='robot-iris-core'></div></div>", unsafe_allow_html=True)
+        strl.markdown("<div class='sumo-combat-telemetry'><div class='sumo-laser-line'></div><div class='sumo-attack-wedge'></div></div><p style='text-align:center; color:#ff0055;'><b>COMBAT CHARGE ATTACK VECTOR ONLINE</b></p>", unsafe_allow_html=True)
+    else: strl.markdown("<div class='robot-iris-portal'><div class='robot-iris-core'></div></div>", unsafe_allow_html=True)
 
     try:
         response = requests.get(f"{API_BASE_URL}/modules/{strl.session_state.team_id}/{target_module}")
         if response.status_code == 200:
             module_data = response.json()
             left_col, right_col = strl.columns([1, 1.2])
-            
             with left_col:
                 strl.markdown("### 🔌 CIRCUIT LAYOUT SCHEMATIC VECTOR")
                 raw_url = str(module_data.get("circuit_diagram_url", "")).strip()
@@ -252,7 +249,7 @@ def run_client_dashboard_scope():
                 if "specs" in module_data:
                     strl.markdown("#### ⚙️ SYSTEM ATTRIBUTES INGESTED")
                     for spec, val in module_data["specs"].items():
-                        if val: strl.write(f"⚙️ **{spec}:** `{val}`")
+                        if val: strl.write(f"🔹 **{spec}:** `{val}`")
             with right_col:
                 strl.markdown("### 💰 ALLOCATED PKR SUPPLY BLOCK BALANCES")
                 if module_data.get("budget"):
@@ -264,7 +261,6 @@ def run_client_dashboard_scope():
                 if module_data.get("firmware"):
                     strl.markdown("### 💻 FIRMWARE LOGIC REGISTERS (C++)")
                     strl.code(module_data["firmware"], language="cpp")
-        else: strl.info("ℹ️ Signal Null: Memory bank arrays unpopulated. Update data in Secure Admin Portal.")
     except Exception as e: strl.error(f"Sync Issue: {str(e)}")
 
 def run_admin_portal_scope():
@@ -276,10 +272,9 @@ def run_admin_portal_scope():
         mod_name = strl.selectbox("SELECT SUBSYSTEM MEMORY BUFFER RECEPTACLE", ["Sumo Robot", "RC Car", "Robo Soccer"])
         
         c_u1, c_u2 = strl.columns([2, 1])
-        with c_u1: diag_url = strl.text_input("SCHEMATIC TOPOLOGY VECTOR INTERFACE LINK (URL)")
+        with c_u1: diag_url = strl.text_input("SCHEMATIC TOPOLOGY LINK (URL)")
         with c_u2: uploaded_pdf = strl.file_uploader("📥 INGEST GROUNDING PDF DATA SHEET", type=["pdf"])
         
-        strl.markdown("#### ⚙️ HARDWARE SPECIFICATION FACTOR SEEDING")
         cl1, cl2, cl3 = strl.columns(3)
         with cl1: chassis = strl.text_input("CHASSIS FRAME GEOMETRY")
         with cl2: mcu = strl.text_input("MCU SYSTEM ARCHITECTURE")
@@ -302,7 +297,7 @@ def run_admin_portal_scope():
             
         firmware_code = strl.text_area("C++ EMBEDDED MEMORY PROGRAM MACHINE CODES PUSH", height=180)
         
-        if strl.button("🚀 BROADCAST STRUCTURALblueprints TO CLUSTER MEMORY NODES", use_container_width=True):
+        if strl.button("🚀 BROADCAST STRUCTURAL BLUEPRINTS TO NODES", use_container_width=True):
             form_payload = {
                 "team_id": strl.session_state.team_id, "module_name": mod_name, "circuit_diagram_url": diag_url.strip(),
                 "chassis": chassis, "mcu": mcu, "motors": motors, "drivers": drivers, "sensors": sensors,
@@ -314,26 +309,57 @@ def run_admin_portal_scope():
                 if res.status_code == 200: strl.success("🎉 Transmission approved! Subsystem architecture synchronized.")
     elif admin_token_input != "": strl.error("🛑 ACCESS VIOLATION: Secure key vector alignment discrepancy.")
 
+# ==========================================
+# RUNTIME HARDWARE TELEMETRY DIAGNOSTICS SUB-SCOPE
+# ==========================================
+def run_hardware_diagnostics_sub_scope():
+    strl.markdown("### 🔌 Run-Time Mechatronics Hardware Diagnostic Terminal")
+    strl.caption("Paste system log streams or state profiles directly to parse technical circuit failure registers.")
+    
+    target_mod = strl.selectbox("Select Target Blueprint Environment to Troubleshoot", ["Sumo Robot", "RC Car", "Robo Soccer"], key="diag_mod_sel")
+    symptom = strl.text_input("Describe Physical Subsystem Structural Fault (e.g., 'Core chip heating up and tracks lagging left')")
+    raw_logs = strl.text_area("Paste Raw Serial Monitor Hex Arrays / Compiler Crash Stack Traces", height=120)
+    
+    if strl.button("📟 RUN CONCURRENT DIAGNOSTIC SIGNAL INTERCEPT", use_container_width=True):
+        if not symptom.strip(): strl.error("❌ Identification abort: Symptom markers require string inputs.")
+        else:
+            with strl.spinner("Isolating telemetry vectors against cluster grounding registers..."):
+                try:
+                    res = requests.post(f"{API_BASE_URL}/agent/diagnose", json={
+                        "team_id": strl.session_state.team_id, "module_name": target_mod,
+                        "error_log_text": raw_logs, "symptom_description": symptom
+                    })
+                    if res.status_code == 200:
+                        strl.success("📟 Systems Diagnosis Complete. Mitigation Steps Outlined Below:")
+                        strl.markdown(res.json()["diagnostic_report"])
+                except Exception as e: strl.error(f"💥 Ground Link Down: {str(e)}")
+
 def run_agentic_planner_scope():
     strl.markdown("<h2>🧠 AGENTIC SPRINT CONTEXT ORCHESTRATION HIVE</h2>", unsafe_allow_html=True)
     
-    strl.markdown("### 👥 1. HUMAN RESOURCE ASSETS & CORE SKILLS REGISTERS")
-    team_members_list = []
-    for k in range(strl.session_state.member_count):
-        strl.markdown(f"##### Asset Node #{k+1}")
-        col_name, col_role = strl.columns([1, 1])
-        with col_name: m_name = strl.text_input(f"OPERATOR NAME", key=f"mem_name_{k}", value="Muhammad Hassaan Awais" if k==0 else ("Ali" if k==1 else ("Roshaan" if k==2 else "")))
-        with col_role: m_role = strl.text_input(f"DESIGNATION", key=f"mem_role_{k}", value="Lead Systems Architect" if k==0 else ("Mechatronics Design Engineer" if k==1 else ("Supply Chain Specialist" if k==2 else "")))
-        m_skills = strl.text_area(f"SKILLS MATRIX LAYER PROFILE", key=f"mem_skills_{k}", value="Low-level firmware optimization, hardware interrupt C++ mapping, async logic core nodes." if k==0 else ("CAD mechanical modeling layout engineering, dynamic mechatronics physics calculations." if k==1 else ("Inventory ledger processing, scarcity tracking variables and budget monitoring." if k==2 else "")))
-        if m_name.strip(): team_members_list.append({"name": m_name.strip(), "role": m_role.strip(), "skills": m_skills.strip()})
-        strl.markdown("---")
+    # Render interactive diagnostic bay alongside planning vectors
+    left_side, right_side = strl.columns([1.1, 1])
+    with left_side:
+        strl.markdown("### 👥 1. HUMAN RESOURCE ASSETS & SKILLS MATRIX")
+        team_members_list = []
+        for k in range(strl.session_state.member_count):
+            strl.markdown(f"##### Asset Node #{k+1}")
+            col_name, col_role = strl.columns([1, 1])
+            with col_name: m_name = strl.text_input(f"OPERATOR NAME", key=f"mem_name_{k}", value="Muhammad Hassaan Awais" if k==0 else ("Ali" if k==1 else ("Roshaan" if k==2 else "")))
+            with col_role: m_role = strl.text_input(f"DESIGNATION", key=f"mem_role_{k}", value="Lead Systems Architect" if k==0 else ("Mechatronics Engineer" if k==1 else ("Supply Specialist" if k==2 else "")))
+            m_skills = strl.text_area(f"SKILLS MATRIX LAYER PROFILE", key=f"mem_skills_{k}", value="Low-level firmware optimization, hardware interrupt C++ mapping, async logic core nodes." if k==0 else ("CAD mechanical modeling layout engineering, high-velocity kinematics design profiles." if k==1 else ("Inventory ledger processing, scarcity tracking variables and budget monitoring." if k==2 else ""))[:100])
+            if m_name.strip(): team_members_list.append({"name": m_name.strip(), "role": m_role.strip(), "skills": m_skills.strip()})
         
-    btn_col1, btn_col2, _ = strl.columns([1.5, 1.5, 3])
-    with btn_col1:
-        if strl.button("➕ ONBOARD WORKSPACE HUMAN ASSET"): strl.session_state.member_count += 1; strl.rerun()
-    with btn_col2:
-        if strl.button("➖ OFFBOARD WORKSPACE HUMAN ASSET") and strl.session_state.member_count > 1: strl.session_state.member_count -= 1; strl.rerun()
-
+        btn_col1, btn_col2 = strl.columns(2)
+        with btn_col1:
+            if strl.button("➕ ONBOARD TEAM ASSET"): strl.session_state.member_count += 1; strl.rerun()
+        with btn_col2:
+            if strl.button("➖ OFFBOARD TEAM ASSET") and strl.session_state.member_count > 1: strl.session_state.member_count -= 1; strl.rerun()
+            
+    with right_side:
+        run_hardware_diagnostics_sub_scope()
+        
+    strl.markdown("---")
     strl.markdown("### 📅 2. COMPETITION VECTOR MILESTONES & SCHEDULING")
     c_e1, c_e2 = strl.columns(2)
     with c_e1: event_name = strl.text_input("TARGET EVENT MISSION DESCRIPTION", value="UET Robocom Hackathon")
@@ -341,7 +367,7 @@ def run_agentic_planner_scope():
     modules_selected = strl.multiselect("BLUEPRINT TRACKING CONSTRAINTS LOADED", ["Sumo Robot", "RC Car", "Robo Soccer"], default=["Sumo Robot"])
 
     date_str = event_date.strftime("%Y%m%d")
-    ics_data = f"BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nDTSTART;VALUE=DATE:{date_str}\nSUMMARY:🏁 Target: {event_name}\nDESCRIPTION:Active multi-agent parameters: {', '.join(modules_selected)}\nBEGIN:VALARM\nTRIGGER:-PT24H\nACTION:DISPLAY\nEND:VALARM\nEND:VEVENT\nEND:VCALENDAR"
+    ics_data = f"BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nDTSTART;VALUE=DATE:{date_str}\nSUMMARY:🏁 Target: {event_name}\nBEGIN:VALARM\nTRIGGER:-PT24H\nACTION:DISPLAY\nEND:VALARM\nEND:VEVENT\nEND:VCALENDAR"
 
     strl.download_button(
         label="📅 INJECT ACTIVE MILESTONES DIRECTLY INTO PERSONAL DEVICE CALENDAR (.ics)",
@@ -356,14 +382,13 @@ def run_agentic_planner_scope():
         with col_i1: inv_name = strl.text_input(f"Stock Component {j+1} String Name", key=f"inv_name_{j}")
         with col_i2: inv_qty = strl.number_input(f"Stock Volume", min_value=0, value=0, key=f"inv_qty_{j}")
         if inv_name.strip(): inventory_pool.append({"item": inv_name.strip(), "available_qty": int(inv_qty)})
-    if strl.button("➕ EXPAND INVENTORY QUANTITY LEDGER MATRIX INDEX"): strl.session_state.inv_rows += 1; strl.rerun()
+    if strl.button("➕ EXPAND INVENTORY LEDGER MATRIX INDEX"): strl.session_state.inv_rows += 1; strl.rerun()
 
     strl.markdown("---")
-    if strl.button("🚀 INITIATE WEB-GROUNDED CRITIC-ACTOR STRATEGY SEQUENCE", use_container_width=True):
+    if strl.button("🚀 INITIATE WEB-GROUNDED CONCURRENT CRITIC-ACTOR STRATEGY SEQUENCE", use_container_width=True):
         if not team_members_list: strl.error("❌ Array Empty: Cannot execute with no tracked personnel.")
         else:
-            strl.markdown("<div class='robot-iris-portal'><div class='robot-iris-core'></div></div>", unsafe_allow_html=True)
-            with strl.spinner("Actors generating draft structures... Critic running real-time Google Search price verifications..."):
+            with strl.spinner("Parallel sub-agents tracking data vectors concurrently... Critic self-correcting via Google Search live PKR thresholds..."):
                 try:
                     agent_res = requests.post(f"{API_BASE_URL}/agent/sprint", json={
                         "team_id": strl.session_state.team_id, "current_inventory": inventory_pool,
@@ -371,7 +396,7 @@ def run_agentic_planner_scope():
                     }, timeout=45)
                     if agent_res.status_code == 200:
                         strl.session_state.cached_plan = agent_res.json()["sprint_plan"]
-                        strl.success("🎯 Strategy Ingestion and Self-Correction Review Loop Fully Concluded!")
+                        strl.success("🎯 Parallel Concurrency Strategy Cycle Complete!")
                         strl.rerun()
                 except Exception as ex: strl.error(f"💥 Ground Link Down: {str(ex)}")
 
@@ -394,7 +419,7 @@ def run_agentic_planner_scope():
         else: strl.markdown(raw_output)
 
 # ==========================================
-# CENTRAL ROUTER MANAGEMENT MATRIX
+# CENTRAL CORE ROUTER ROUTING DESK
 # ==========================================
 if not strl.session_state.authenticated:
     render_authentication_gate()
